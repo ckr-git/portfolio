@@ -1,31 +1,57 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - AI Image Processing & Full-Stack Projects</title>
+    <title>Portfolio - Full-Stack Developer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <span class="lang-divider">|</span>
+        <button class="lang-btn" data-lang="zh">中文</button>
+    </div>
+
+    <!-- Hero Section -->
     <header class="hero">
-        <div class="container">
-            <h1>My Portfolio</h1>
-            <p class="subtitle">AI Image Processing & Full-Stack Development</p>
-            <p class="intro">Showcasing 6 production-ready projects with modern tech stacks</p>
+        <div class="hero-content">
+            <h1 class="glitch" data-text="DEVELOPER">
+                <span data-en="DEVELOPER" data-zh="开发者">DEVELOPER</span>
+            </h1>
+            <p class="typewriter">
+                <span data-en="Full-Stack Development & AI Integration" data-zh="全栈开发 & AI 集成">Full-Stack Development & AI Integration</span>
+            </p>
+            <p class="hero-desc">
+                <span data-en="Building production-ready applications with modern tech stacks" data-zh="使用现代技术栈构建生产级应用">Building production-ready applications with modern tech stacks</span>
+            </p>
+            <div class="scroll-indicator">
+                <div class="mouse"></div>
+                <span data-en="Scroll to explore" data-zh="向下滚动探索">Scroll to explore</span>
+            </div>
         </div>
     </header>
 
     <main class="container">
-        <!-- AI Image Processing Section -->
+        <!-- AI Projects Section -->
         <section class="section" id="ai-projects">
-            <h2 class="section-title">AI Image Processing Projects</h2>
+            <h2 class="section-title fade-in">
+                <span class="title-icon">&#x2726;</span>
+                <span data-en="AI & Image Processing" data-zh="AI & 图像处理">AI & Image Processing</span>
+            </h2>
 
-            <!-- Project 1: AI Image Platform -->
-            <article class="project featured">
-                <div class="project-badge">Featured</div>
+            <!-- Project 1: AI Image Platform (Commercial) -->
+            <article class="project commercial fade-in">
+                <div class="project-glow"></div>
+                <div class="project-badge commercial-badge" data-en="Commercial Project" data-zh="商业项目">Commercial Project</div>
                 <h3>AI Image Platform</h3>
-                <p class="project-desc">Enterprise-grade AI-powered image processing SaaS platform with background replacement, model shoe changing, and pose editing capabilities.</p>
-
+                <p class="project-desc">
+                    <span data-en="Enterprise-grade AI-powered image processing SaaS platform. Developed as a commercial project for client deployment." data-zh="企业级AI图像处理SaaS平台。作为商业项目为客户开发部署。">Enterprise-grade AI-powered image processing SaaS platform. Developed as a commercial project for client deployment.</span>
+                </p>
                 <div class="tech-stack">
                     <span class="tech backend">FastAPI</span>
                     <span class="tech backend">Python</span>
@@ -34,214 +60,220 @@
                     <span class="tech db">PostgreSQL</span>
                     <span class="tech ai">Gemini AI</span>
                     <span class="tech ai">ComfyUI</span>
-                    <span class="tech cloud">Aliyun OSS</span>
                     <span class="tech devops">Docker</span>
                 </div>
-
                 <div class="features">
-                    <h4>Key Features</h4>
+                    <h4 data-en="Key Features" data-zh="核心功能">Key Features</h4>
                     <ul>
-                        <li>User authentication with JWT + bcrypt encryption</li>
-                        <li>Credit/points system for AI operations</li>
-                        <li>Background task processing (no Redis/Celery needed)</li>
-                        <li>Multiple AI workflows integration</li>
-                        <li>Order management system</li>
-                        <li>Template system for quick operations</li>
+                        <li data-en="AI background replacement & model editing" data-zh="AI背景替换 & 模特编辑">AI background replacement & model editing</li>
+                        <li data-en="Credit system & order management" data-zh="积分系统 & 订单管理">Credit system & order management</li>
+                        <li data-en="Multi-workflow AI integration" data-zh="多工作流AI集成">Multi-workflow AI integration</li>
+                        <li data-en="JWT authentication & role-based access" data-zh="JWT认证 & 基于角色的访问控制">JWT authentication & role-based access</li>
                     </ul>
                 </div>
-
-                <div class="architecture">
-                    <h4>Architecture</h4>
-                    <p>Full-stack separation: FastAPI backend with SQLAlchemy 2.0 ORM, React 19 frontend with Zustand state management, containerized deployment with Docker Compose.</p>
+                <div class="commercial-notice">
+                    <span class="lock-icon">&#x1F512;</span>
+                    <span data-en="Source code not publicly available (Commercial Project)" data-zh="源代码不公开（商业项目）">Source code not publicly available (Commercial Project)</span>
                 </div>
-
-                <a href="https://github.com/ckr-git/ai-image-platform" class="btn" target="_blank">View on GitHub</a>
             </article>
 
             <!-- Project 2: Image Batch Processor -->
-            <article class="project">
+            <article class="project fade-in">
+                <div class="project-glow"></div>
                 <h3>Image Batch Processor</h3>
-                <p class="project-desc">Professional batch image processing tool with 6 core features including AI background removal, compression, format conversion, and watermarking.</p>
-
+                <p class="project-desc">
+                    <span data-en="Professional batch image processing tool with 6 core features including AI background removal." data-zh="专业批量图像处理工具，包含6大核心功能，支持AI背景移除。">Professional batch image processing tool with 6 core features including AI background removal.</span>
+                </p>
                 <div class="tech-stack">
                     <span class="tech frontend">React 18</span>
                     <span class="tech frontend">Vite</span>
                     <span class="tech backend">Node.js</span>
                     <span class="tech backend">Express</span>
                     <span class="tech backend">Sharp</span>
-                    <span class="tech ai">Remove.bg API</span>
+                    <span class="tech ai">Remove.bg</span>
                 </div>
-
                 <div class="features">
-                    <h4>Key Features</h4>
+                    <h4 data-en="Key Features" data-zh="核心功能">Key Features</h4>
                     <ul>
-                        <li>Batch compression with smart quality control</li>
-                        <li>Crop/resize with multiple fit modes</li>
-                        <li>Format conversion (JPG/PNG/WebP/AVIF)</li>
-                        <li>Custom text watermarking</li>
-                        <li>AI background removal</li>
-                        <li>ZIP packaging for batch downloads</li>
+                        <li data-en="Batch compression with smart quality control" data-zh="智能质量控制的批量压缩">Batch compression with smart quality control</li>
+                        <li data-en="Format conversion (JPG/PNG/WebP/AVIF)" data-zh="格式转换 (JPG/PNG/WebP/AVIF)">Format conversion (JPG/PNG/WebP/AVIF)</li>
+                        <li data-en="AI background removal integration" data-zh="AI背景移除集成">AI background removal integration</li>
+                        <li data-en="ZIP packaging for batch downloads" data-zh="批量下载ZIP打包">ZIP packaging for batch downloads</li>
                     </ul>
                 </div>
-
-                <a href="https://github.com/ckr-git/image-batch-processor" class="btn" target="_blank">View on GitHub</a>
+                <a href="https://github.com/ckr-git/image-batch-processor" class="btn glow-btn" target="_blank">
+                    <span class="btn-icon">&#x2197;</span>
+                    <span data-en="View on GitHub" data-zh="在GitHub查看">View on GitHub</span>
+                </a>
             </article>
         </section>
 
         <!-- Full-Stack Projects Section -->
         <section class="section" id="fullstack-projects">
-            <h2 class="section-title">Full-Stack Projects</h2>
+            <h2 class="section-title fade-in">
+                <span class="title-icon">&#x2726;</span>
+                <span data-en="Full-Stack Projects" data-zh="全栈项目">Full-Stack Projects</span>
+            </h2>
 
             <!-- Project 3: PDF Toolbox -->
-            <article class="project">
+            <article class="project fade-in">
+                <div class="project-glow"></div>
                 <h3>PDF Toolbox</h3>
-                <p class="project-desc">Professional PDF processing tool with 8 core features powered by Ghostscript. Features Pro Studio workflow interface with dark mode support.</p>
-
+                <p class="project-desc">
+                    <span data-en="Professional PDF processing tool with 8 core features. Pro Studio interface with dark mode." data-zh="专业PDF处理工具，8大核心功能。Pro Studio界面，支持深色模式。">Professional PDF processing tool with 8 core features. Pro Studio interface with dark mode.</span>
+                </p>
                 <div class="tech-stack">
                     <span class="tech frontend">React 18</span>
                     <span class="tech frontend">Vite 5</span>
-                    <span class="tech frontend">Tailwind CSS</span>
+                    <span class="tech frontend">Tailwind</span>
                     <span class="tech backend">Node.js</span>
-                    <span class="tech backend">Express</span>
                     <span class="tech backend">Ghostscript</span>
                     <span class="tech backend">pdf-lib</span>
                 </div>
-
                 <div class="features">
-                    <h4>Key Features</h4>
+                    <h4 data-en="Key Features" data-zh="核心功能">Key Features</h4>
                     <ul>
-                        <li>PDF merge, split (single/range), compress (30-70%)</li>
-                        <li>128-bit encryption/decryption</li>
-                        <li>Page rotation and deletion</li>
-                        <li>PDF to image conversion (PNG/JPEG/TIFF)</li>
-                        <li>Dark mode with theme persistence</li>
-                        <li>Mobile-responsive drawer navigation</li>
+                        <li data-en="Merge, split, compress (30-70% reduction)" data-zh="合并、拆分、压缩（30-70%压缩率）">Merge, split, compress (30-70% reduction)</li>
+                        <li data-en="128-bit encryption/decryption" data-zh="128位加密/解密">128-bit encryption/decryption</li>
+                        <li data-en="PDF to image conversion" data-zh="PDF转图片">PDF to image conversion</li>
+                        <li data-en="Dark mode & mobile responsive" data-zh="深色模式 & 移动端适配">Dark mode & mobile responsive</li>
                     </ul>
                 </div>
-
-                <a href="https://github.com/ckr-git/pdf-toolbox" class="btn" target="_blank">View on GitHub</a>
+                <a href="https://github.com/ckr-git/pdf-toolbox" class="btn glow-btn" target="_blank">
+                    <span class="btn-icon">&#x2197;</span>
+                    <span data-en="View on GitHub" data-zh="在GitHub查看">View on GitHub</span>
+                </a>
             </article>
 
             <!-- Project 4: CRM System -->
-            <article class="project">
-                <h3>CRM Customer Management System</h3>
-                <p class="project-desc">Enterprise-grade CRM system with complete customer lifecycle management, sales funnel tracking, and data analytics dashboard.</p>
-
+            <article class="project fade-in">
+                <div class="project-glow"></div>
+                <h3>CRM Management System</h3>
+                <p class="project-desc">
+                    <span data-en="Enterprise CRM with customer lifecycle management, sales funnel tracking, and analytics." data-zh="企业级CRM系统，客户生命周期管理、销售漏斗跟踪、数据分析。">Enterprise CRM with customer lifecycle management, sales funnel tracking, and analytics.</span>
+                </p>
                 <div class="tech-stack">
                     <span class="tech frontend">Vue 3.4</span>
                     <span class="tech frontend">TypeScript</span>
                     <span class="tech frontend">Element Plus</span>
-                    <span class="tech frontend">Pinia</span>
-                    <span class="tech backend">Node.js 18</span>
+                    <span class="tech backend">Node.js</span>
                     <span class="tech backend">Express</span>
-                    <span class="tech db">MySQL 8.0</span>
-                    <span class="tech db">Redis 7</span>
+                    <span class="tech db">MySQL</span>
+                    <span class="tech db">Redis</span>
                     <span class="tech devops">Docker</span>
                 </div>
-
                 <div class="features">
-                    <h4>Key Features</h4>
+                    <h4 data-en="Key Features" data-zh="核心功能">Key Features</h4>
                     <ul>
-                        <li>Complete business cycle: acquisition - follow-up - conversion - analysis</li>
-                        <li>Fine-grained RBAC permission control</li>
-                        <li>ECharts data visualization dashboard</li>
-                        <li>Responsive design for PC and tablet</li>
-                        <li>Comprehensive documentation system</li>
-                        <li>Docker Compose one-click deployment</li>
+                        <li data-en="Complete business cycle management" data-zh="完整业务周期管理">Complete business cycle management</li>
+                        <li data-en="Fine-grained RBAC permission control" data-zh="细粒度RBAC权限控制">Fine-grained RBAC permission control</li>
+                        <li data-en="ECharts data visualization" data-zh="ECharts数据可视化">ECharts data visualization</li>
+                        <li data-en="Docker one-click deployment" data-zh="Docker一键部署">Docker one-click deployment</li>
                     </ul>
                 </div>
-
-                <a href="https://github.com/ckr-git/crm-management-system" class="btn" target="_blank">View on GitHub</a>
+                <a href="https://github.com/ckr-git/crm-management-system" class="btn glow-btn" target="_blank">
+                    <span class="btn-icon">&#x2197;</span>
+                    <span data-en="View on GitHub" data-zh="在GitHub查看">View on GitHub</span>
+                </a>
             </article>
 
             <!-- Project 5: Mental Health System -->
-            <article class="project">
-                <h3>AI Mental Health Management System</h3>
-                <p class="project-desc">Intelligent mental health platform with AI-powered conversations, psychological assessments, and personalized recommendations.</p>
-
+            <article class="project fade-in">
+                <div class="project-glow"></div>
+                <h3>AI Mental Health System</h3>
+                <p class="project-desc">
+                    <span data-en="Intelligent mental health platform with AI conversations and psychological assessments." data-zh="智能心理健康平台，AI对话和心理评估。">Intelligent mental health platform with AI conversations and psychological assessments.</span>
+                </p>
                 <div class="tech-stack">
                     <span class="tech frontend">Vue 3</span>
                     <span class="tech frontend">TypeScript</span>
-                    <span class="tech frontend">Element Plus</span>
                     <span class="tech frontend">ECharts</span>
-                    <span class="tech backend">Spring Boot 3.2</span>
+                    <span class="tech backend">Spring Boot 3</span>
                     <span class="tech backend">WebSocket</span>
-                    <span class="tech db">MySQL 8.0</span>
+                    <span class="tech db">MySQL</span>
                     <span class="tech ai">AI Dialog</span>
                 </div>
-
                 <div class="features">
-                    <h4>Key Features</h4>
+                    <h4 data-en="Key Features" data-zh="核心功能">Key Features</h4>
                     <ul>
-                        <li>Real-time AI conversation via WebSocket</li>
-                        <li>Psychological assessment system</li>
-                        <li>Recommendation engine (Apache Commons Math)</li>
-                        <li>Audio support with Howler.js</li>
-                        <li>Data visualization dashboard</li>
-                        <li>Spring Security + JWT authentication</li>
+                        <li data-en="Real-time AI conversation via WebSocket" data-zh="WebSocket实时AI对话">Real-time AI conversation via WebSocket</li>
+                        <li data-en="Psychological assessment system" data-zh="心理评估系统">Psychological assessment system</li>
+                        <li data-en="Recommendation engine" data-zh="推荐引擎">Recommendation engine</li>
+                        <li data-en="Spring Security + JWT auth" data-zh="Spring Security + JWT认证">Spring Security + JWT auth</li>
                     </ul>
                 </div>
-
-                <a href="https://github.com/ckr-git/mental-health-system" class="btn" target="_blank">View on GitHub</a>
+                <a href="https://github.com/ckr-git/mental-health-system" class="btn glow-btn" target="_blank">
+                    <span class="btn-icon">&#x2197;</span>
+                    <span data-en="View on GitHub" data-zh="在GitHub查看">View on GitHub</span>
+                </a>
             </article>
 
-            <!-- Project 6: Game Community Platform -->
-            <article class="project">
+            <!-- Project 6: Game Community -->
+            <article class="project fade-in">
+                <div class="project-glow"></div>
                 <h3>Game Community Platform</h3>
-                <p class="project-desc">Full-featured gaming community with real-time chat rooms, forum system, and collaborative filtering recommendation engine.</p>
-
+                <p class="project-desc">
+                    <span data-en="Gaming community with real-time chat, forum system, and recommendation engine." data-zh="游戏社区平台，实时聊天、论坛系统、推荐引擎。">Gaming community with real-time chat, forum system, and recommendation engine.</span>
+                </p>
                 <div class="tech-stack">
                     <span class="tech frontend">Vue 3</span>
                     <span class="tech frontend">Vite</span>
                     <span class="tech frontend">Element Plus</span>
-                    <span class="tech backend">Spring Boot 3.1</span>
-                    <span class="tech backend">MyBatis-Plus</span>
+                    <span class="tech backend">Spring Boot 3</span>
                     <span class="tech backend">WebSocket</span>
-                    <span class="tech db">MySQL 8.0</span>
+                    <span class="tech db">MySQL</span>
                     <span class="tech db">Redis</span>
                 </div>
-
                 <div class="features">
-                    <h4>Key Features</h4>
+                    <h4 data-en="Key Features" data-zh="核心功能">Key Features</h4>
                     <ul>
-                        <li>Real-time chat rooms via WebSocket</li>
-                        <li>Collaborative filtering recommendation (cosine similarity)</li>
-                        <li>Complete forum system with posts, comments, likes</li>
-                        <li>Content moderation and reporting</li>
-                        <li>Game browsing and collection</li>
-                        <li>ECharts admin analytics dashboard</li>
+                        <li data-en="Real-time chat rooms via WebSocket" data-zh="WebSocket实时聊天室">Real-time chat rooms via WebSocket</li>
+                        <li data-en="Collaborative filtering recommendation" data-zh="协同过滤推荐">Collaborative filtering recommendation</li>
+                        <li data-en="Forum with posts, comments, likes" data-zh="论坛：帖子、评论、点赞">Forum with posts, comments, likes</li>
+                        <li data-en="Content moderation system" data-zh="内容审核系统">Content moderation system</li>
                     </ul>
                 </div>
-
-                <a href="https://github.com/ckr-git/game-community" class="btn" target="_blank">View on GitHub</a>
+                <a href="https://github.com/ckr-git/game-community" class="btn glow-btn" target="_blank">
+                    <span class="btn-icon">&#x2197;</span>
+                    <span data-en="View on GitHub" data-zh="在GitHub查看">View on GitHub</span>
+                </a>
             </article>
         </section>
 
-        <!-- Tech Stack Summary -->
-        <section class="section" id="tech-summary">
-            <h2 class="section-title">Technology Stack</h2>
+        <!-- Tech Stack Section -->
+        <section class="section" id="tech-stack">
+            <h2 class="section-title fade-in">
+                <span class="title-icon">&#x2726;</span>
+                <span data-en="Technology Stack" data-zh="技术栈">Technology Stack</span>
+            </h2>
             <div class="tech-grid">
-                <div class="tech-category">
+                <div class="tech-category fade-in">
+                    <div class="category-icon">&#x2756;</div>
                     <h4>Frontend</h4>
-                    <p>React 18/19, Vue 3, TypeScript, Vite, Tailwind CSS, Element Plus</p>
+                    <p>React 18/19, Vue 3, TypeScript, Vite, Tailwind CSS</p>
                 </div>
-                <div class="tech-category">
+                <div class="tech-category fade-in">
+                    <div class="category-icon">&#x2756;</div>
                     <h4>Backend</h4>
-                    <p>Node.js, Express, FastAPI, Spring Boot 3, MyBatis-Plus</p>
+                    <p>Node.js, Express, FastAPI, Spring Boot 3</p>
                 </div>
-                <div class="tech-category">
+                <div class="tech-category fade-in">
+                    <div class="category-icon">&#x2756;</div>
                     <h4>Database</h4>
                     <p>MySQL 8.0, PostgreSQL, Redis</p>
                 </div>
-                <div class="tech-category">
+                <div class="tech-category fade-in">
+                    <div class="category-icon">&#x2756;</div>
                     <h4>AI/ML</h4>
-                    <p>Gemini AI, ComfyUI, Remove.bg, Collaborative Filtering</p>
+                    <p>Gemini AI, ComfyUI, Collaborative Filtering</p>
                 </div>
-                <div class="tech-category">
+                <div class="tech-category fade-in">
+                    <div class="category-icon">&#x2756;</div>
                     <h4>DevOps</h4>
-                    <p>Docker, Docker Compose, Nginx, Aliyun OSS</p>
+                    <p>Docker, Docker Compose, Nginx</p>
                 </div>
-                <div class="tech-category">
+                <div class="tech-category fade-in">
+                    <div class="category-icon">&#x2756;</div>
                     <h4>Real-time</h4>
                     <p>WebSocket, STOMP, SockJS</p>
                 </div>
@@ -251,9 +283,13 @@
 
     <footer>
         <div class="container">
-            <p>Built with passion for AI and full-stack development</p>
-            <p><a href="https://github.com/ckr-git" target="_blank">GitHub Profile</a></p>
+            <p data-en="Built with passion for technology" data-zh="以对技术的热情构建">Built with passion for technology</p>
+            <a href="https://github.com/ckr-git" target="_blank" class="footer-link">
+                <span class="github-icon">&#x2B22;</span> GitHub
+            </a>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
