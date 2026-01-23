@@ -62,7 +62,7 @@ body::after {
         repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(56, 189, 248, 0.01) 2px, rgba(56, 189, 248, 0.01) 4px);
     background-size: 80px 80px, 80px 80px, 100% 4px;
     pointer-events: none;
-    z-index: -1;
+    z-index: -3;
     animation: scanline 8s linear infinite;
 }
 
@@ -79,7 +79,7 @@ body::after {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 0;
+    z-index: -2;
 }
 
 .particle {
