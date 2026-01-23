@@ -1,18 +1,21 @@
 /* ========================================
-   Sci-Fi Portfolio Theme
+   Sci-Fi Portfolio Theme - Space Edition
    ======================================== */
 
 :root {
-    --primary: #00f0ff;
-    --secondary: #b400ff;
-    --accent: #ff00aa;
-    --bg-dark: #0a0a0f;
-    --bg-card: #12121a;
-    --bg-card-hover: #1a1a25;
-    --text-primary: #e0e0e0;
-    --text-secondary: #888;
-    --glow-primary: 0 0 20px rgba(0, 240, 255, 0.5);
-    --glow-secondary: 0 0 20px rgba(180, 0, 255, 0.5);
+    /* 冰蓝+深紫太空配色 */
+    --primary: #38bdf8;
+    --primary-bright: #7dd3fc;
+    --secondary: #a855f7;
+    --accent: #22d3ee;
+    --bg-dark: #030014;
+    --bg-card: rgba(15, 10, 40, 0.8);
+    --bg-card-hover: rgba(25, 20, 60, 0.9);
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --glow-primary: 0 0 30px rgba(56, 189, 248, 0.6), 0 0 60px rgba(56, 189, 248, 0.3);
+    --glow-secondary: 0 0 30px rgba(168, 85, 247, 0.6);
+    --gradient-primary: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
 }
 
 * {
@@ -29,7 +32,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Grid Background Pattern */
+/* 星空背景 */
 body::before {
     content: '';
     position: fixed;
@@ -37,15 +40,38 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image:
-        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
+    background:
+        radial-gradient(ellipse at 20% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(56, 189, 248, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(15, 10, 40, 0.8) 0%, transparent 100%);
     pointer-events: none;
-    z-index: -1;
+    z-index: -2;
 }
 
-/* Particle Background */
+/* 网格线 + 扫描线效果 */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(56, 189, 248, 0.01) 2px, rgba(56, 189, 248, 0.01) 4px);
+    background-size: 80px 80px, 80px 80px, 100% 4px;
+    pointer-events: none;
+    z-index: -1;
+    animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+    0% { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 0 0, 0 0, 0 100vh; }
+}
+
+/* Particle Background - 星星效果 */
 .particles {
     position: fixed;
     top: 0;
@@ -60,30 +86,24 @@ body::before {
     position: absolute;
     width: 2px;
     height: 2px;
-    background: var(--primary);
+    background: var(--primary-bright);
     border-radius: 50%;
-    opacity: 0.6;
-    animation: float 15s infinite;
+    opacity: 0.8;
+    box-shadow: 0 0 6px var(--primary);
+    animation: twinkle 3s ease-in-out infinite, drift 20s linear infinite;
 }
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(100vh) translateX(0);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.6;
-    }
-    90% {
-        opacity: 0.6;
-    }
-    100% {
-        transform: translateY(-100vh) translateX(100px);
-        opacity: 0;
-    }
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
 }
 
-/* Language Switcher */
+@keyframes drift {
+    0% { transform: translateY(100vh) translateX(0); }
+    100% { transform: translateY(-100vh) translateX(50px); }
+}
+
+/* Language Switcher - HUD风格 */
 .lang-switcher {
     position: fixed;
     top: 20px;
@@ -92,31 +112,46 @@ body::before {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: rgba(18, 18, 26, 0.9);
+    background: rgba(3, 0, 20, 0.8);
     padding: 8px 16px;
-    border-radius: 25px;
-    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 4px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
     backdrop-filter: blur(10px);
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.lang-switcher::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient-primary);
 }
 
 .lang-btn {
     background: transparent;
     border: none;
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 4px;
+    padding: 4px 10px;
+    border-radius: 2px;
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .lang-btn:hover {
     color: var(--primary);
+    background: rgba(56, 189, 248, 0.1);
 }
 
 .lang-btn.active {
     color: var(--primary);
     text-shadow: var(--glow-primary);
+    background: rgba(56, 189, 248, 0.15);
 }
 
 .lang-divider {
@@ -133,7 +168,7 @@ body::before {
     z-index: 1;
 }
 
-/* Hero Section */
+/* Hero Section - 太空风格 */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -149,11 +184,31 @@ body::before {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+    width: 800px;
+    height: 800px;
+    background:
+        radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 30% 70%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
     transform: translate(-50%, -50%);
-    animation: pulse 4s ease-in-out infinite;
+    animation: pulse 6s ease-in-out infinite;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgba(56, 189, 248, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: orbit 20s linear infinite;
+}
+
+@keyframes orbit {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 @keyframes pulse {
@@ -172,16 +227,19 @@ body::before {
     z-index: 1;
 }
 
-/* Glitch Effect */
+/* Glitch Effect - 增强版 */
 .glitch {
-    font-size: 4rem;
-    font-weight: 700;
-    color: var(--primary);
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     position: relative;
-    text-shadow: var(--glow-primary);
-    animation: glitch 2s infinite;
+    text-shadow:
+        0 0 10px rgba(56, 189, 248, 0.5),
+        0 0 20px rgba(56, 189, 248, 0.3),
+        0 0 40px rgba(56, 189, 248, 0.2);
+    animation: glitch 3s infinite;
 }
 
 .glitch::before,
@@ -195,17 +253,17 @@ body::before {
 }
 
 .glitch::before {
-    color: var(--accent);
-    animation: glitch-1 0.3s infinite;
+    color: var(--primary);
+    animation: glitch-1 0.4s infinite;
     clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-    transform: translate(-2px, -2px);
+    transform: translate(-3px, -3px);
 }
 
 .glitch::after {
     color: var(--secondary);
-    animation: glitch-2 0.3s infinite;
+    animation: glitch-2 0.4s infinite;
     clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-    transform: translate(2px, 2px);
+    transform: translate(3px, 3px);
 }
 
 @keyframes glitch {
@@ -262,38 +320,36 @@ body::before {
     }
 }
 
-/* Typewriter Effect */
+/* Typewriter Effect - 太空风格 */
 .typewriter {
-    font-size: 1.5rem;
-    color: var(--text-secondary);
-    margin: 20px 0;
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin: 25px 0;
     overflow: hidden;
     white-space: nowrap;
+    letter-spacing: 0.05em;
 }
 
 .typewriter span {
     display: inline-block;
     border-right: 2px solid var(--primary);
-    padding-right: 5px;
-    animation: blink 0.7s step-end infinite;
+    padding-right: 8px;
+    animation: blink 0.8s step-end infinite;
 }
 
 @keyframes blink {
-    0%, 100% {
-        border-color: var(--primary);
-    }
-    50% {
-        border-color: transparent;
-    }
+    0%, 100% { border-color: var(--primary); }
+    50% { border-color: transparent; }
 }
 
 .hero-desc {
     color: var(--text-secondary);
     font-size: 1.1rem;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
+    letter-spacing: 0.02em;
 }
 
-/* Scroll Indicator */
+/* Scroll Indicator - 太空风格 */
 .scroll-indicator {
     position: absolute;
     bottom: 40px;
@@ -302,18 +358,21 @@ body::before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     color: var(--text-secondary);
-    font-size: 0.85rem;
-    animation: bounce 2s infinite;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: bounce 2.5s infinite;
 }
 
 .mouse {
-    width: 24px;
-    height: 40px;
+    width: 26px;
+    height: 42px;
     border: 2px solid var(--primary);
-    border-radius: 12px;
+    border-radius: 14px;
     position: relative;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
 }
 
 .mouse::before {
@@ -323,10 +382,11 @@ body::before {
     left: 50%;
     transform: translateX(-50%);
     width: 4px;
-    height: 8px;
+    height: 10px;
     background: var(--primary);
     border-radius: 2px;
-    animation: scroll 1.5s infinite;
+    animation: scroll 1.8s infinite;
+    box-shadow: 0 0 8px var(--primary);
 }
 
 @keyframes scroll {
@@ -352,45 +412,51 @@ body::before {
     }
 }
 
-/* Section Styles */
+/* Section Styles - HUD风格 */
 .section {
-    padding: 80px 0;
+    padding: 100px 0;
 }
 
 .section-title {
-    font-size: 2rem;
-    margin-bottom: 50px;
-    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 60px;
+    color: var(--text-primary);
     display: flex;
     align-items: center;
     gap: 15px;
-    text-shadow: var(--glow-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.section-title span:last-child {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .title-icon {
-    font-size: 1.5rem;
-    animation: rotate 4s linear infinite;
+    font-size: 1.2rem;
+    color: var(--primary);
+    animation: pulse-icon 2s ease-in-out infinite;
 }
 
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+@keyframes pulse-icon {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
 }
 
-/* Project Cards */
+/* Project Cards - 太空舱风格 */
 .project {
     background: var(--bg-card);
-    border-radius: 16px;
-    padding: 30px;
-    margin-bottom: 30px;
+    border-radius: 8px;
+    padding: 35px;
+    margin-bottom: 35px;
     position: relative;
-    border: 1px solid rgba(0, 240, 255, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.15);
     transition: all 0.4s ease;
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .project::before {
@@ -400,20 +466,34 @@ body::before {
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, var(--primary), transparent);
-    transform: translateX(-100%);
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: left;
     transition: transform 0.6s ease;
+}
+
+.project::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, transparent 50%, rgba(56, 189, 248, 0.05) 50%);
+    pointer-events: none;
 }
 
 .project:hover {
     background: var(--bg-card-hover);
-    border-color: rgba(0, 240, 255, 0.3);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 40px rgba(0, 240, 255, 0.1);
+    border-color: rgba(56, 189, 248, 0.4);
+    transform: translateY(-8px);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(56, 189, 248, 0.1);
 }
 
 .project:hover::before {
-    transform: translateX(100%);
+    transform: scaleX(1);
 }
 
 .project-glow {
@@ -422,7 +502,7 @@ body::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, transparent 50%);
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.03) 0%, transparent 50%);
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
@@ -434,49 +514,54 @@ body::before {
 
 /* Commercial Project Styling */
 .project.commercial {
-    border-color: rgba(180, 0, 255, 0.3);
+    border-color: rgba(168, 85, 247, 0.3);
 }
 
 .project.commercial::before {
-    background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+    background: linear-gradient(90deg, var(--secondary), var(--primary));
 }
 
 .project.commercial:hover {
-    border-color: rgba(180, 0, 255, 0.5);
-    box-shadow: 0 10px 40px rgba(180, 0, 255, 0.15);
+    border-color: rgba(168, 85, 247, 0.5);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(168, 85, 247, 0.15);
 }
 
 .project-badge {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: rgba(0, 240, 255, 0.2);
+    background: rgba(56, 189, 248, 0.15);
     color: var(--primary);
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    border: 1px solid rgba(0, 240, 255, 0.3);
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .commercial-badge {
-    background: rgba(180, 0, 255, 0.2);
+    background: rgba(168, 85, 247, 0.15);
     color: var(--secondary);
-    border-color: rgba(180, 0, 255, 0.3);
+    border-color: rgba(168, 85, 247, 0.3);
 }
 
 .project h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-bottom: 15px;
     color: var(--text-primary);
+    font-weight: 600;
 }
 
 .project-desc {
     color: var(--text-secondary);
-    margin-bottom: 20px;
-    line-height: 1.7;
+    margin-bottom: 25px;
+    line-height: 1.8;
 }
 
-/* Tech Stack Tags */
+/* Tech Stack Tags - 太空风格 */
 .tech-stack {
     display: flex;
     flex-wrap: wrap;
@@ -485,115 +570,125 @@ body::before {
 }
 
 .tech {
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 0.8rem;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
     font-weight: 500;
     border: 1px solid;
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .tech:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .tech.frontend {
-    background: rgba(0, 240, 255, 0.1);
+    background: rgba(56, 189, 248, 0.1);
     color: var(--primary);
-    border-color: rgba(0, 240, 255, 0.3);
+    border-color: rgba(56, 189, 248, 0.3);
 }
 
 .tech.backend {
-    background: rgba(0, 255, 136, 0.1);
-    color: #00ff88;
-    border-color: rgba(0, 255, 136, 0.3);
+    background: rgba(34, 211, 238, 0.1);
+    color: var(--accent);
+    border-color: rgba(34, 211, 238, 0.3);
 }
 
 .tech.db {
-    background: rgba(255, 170, 0, 0.1);
-    color: #ffaa00;
-    border-color: rgba(255, 170, 0, 0.3);
+    background: rgba(251, 191, 36, 0.1);
+    color: #fbbf24;
+    border-color: rgba(251, 191, 36, 0.3);
 }
 
 .tech.ai {
-    background: rgba(255, 0, 170, 0.1);
-    color: var(--accent);
-    border-color: rgba(255, 0, 170, 0.3);
+    background: rgba(168, 85, 247, 0.1);
+    color: var(--secondary);
+    border-color: rgba(168, 85, 247, 0.3);
 }
 
 .tech.devops {
-    background: rgba(180, 0, 255, 0.1);
-    color: var(--secondary);
-    border-color: rgba(180, 0, 255, 0.3);
+    background: rgba(74, 222, 128, 0.1);
+    color: #4ade80;
+    border-color: rgba(74, 222, 128, 0.3);
 }
 
-/* Features */
+/* Features - 太空风格 */
 .features {
     margin-bottom: 25px;
 }
 
 .features h4 {
-    font-size: 0.95rem;
-    margin-bottom: 12px;
-    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    color: var(--primary);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
+    font-weight: 500;
 }
 
 .features ul {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 10px;
+    gap: 12px;
 }
 
 .features li {
-    padding: 8px 0;
+    padding: 10px 0;
     padding-left: 25px;
     position: relative;
     color: var(--text-secondary);
+    font-size: 0.95rem;
 }
 
 .features li::before {
-    content: "▹";
+    content: "▸";
     position: absolute;
     left: 0;
     color: var(--primary);
+    font-size: 0.8rem;
 }
 
 /* Commercial Notice */
 .commercial-notice {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     padding: 15px 20px;
-    background: rgba(180, 0, 255, 0.1);
-    border-radius: 8px;
-    border: 1px solid rgba(180, 0, 255, 0.2);
+    background: rgba(168, 85, 247, 0.08);
+    border-radius: 4px;
+    border: 1px solid rgba(168, 85, 247, 0.2);
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin-top: 20px;
 }
 
 .lock-icon {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    color: var(--secondary);
 }
 
-/* Glow Button */
+/* Glow Button - 太空风格 */
 .btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     background: transparent;
     color: var(--primary);
-    padding: 12px 28px;
-    border-radius: 30px;
+    padding: 12px 24px;
+    border-radius: 4px;
     text-decoration: none;
     font-weight: 500;
-    border: 2px solid var(--primary);
+    font-size: 0.85rem;
+    border: 1px solid var(--primary);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .btn::before {
@@ -603,13 +698,13 @@ body::before {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.3), transparent);
     transition: left 0.5s ease;
 }
 
 .btn:hover {
-    background: rgba(0, 240, 255, 0.1);
-    box-shadow: var(--glow-primary);
+    background: rgba(56, 189, 248, 0.1);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
     transform: translateY(-2px);
 }
 
@@ -618,37 +713,29 @@ body::before {
 }
 
 .btn-icon {
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .glow-btn {
-    animation: glow-pulse 2s ease-in-out infinite;
+    animation: none;
 }
 
-@keyframes glow-pulse {
-    0%, 100% {
-        box-shadow: 0 0 5px rgba(0, 240, 255, 0.2);
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
-    }
-}
-
-/* Tech Grid */
+/* Tech Grid - 太空风格 */
 .tech-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
 }
 
 .tech-category {
     background: var(--bg-card);
     padding: 25px;
-    border-radius: 12px;
-    border: 1px solid rgba(0, 240, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(56, 189, 248, 0.1);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .tech-category::before {
@@ -656,32 +743,34 @@ body::before {
     position: absolute;
     top: 0;
     left: 0;
-    width: 4px;
+    width: 3px;
     height: 100%;
-    background: linear-gradient(180deg, var(--primary), var(--secondary));
+    background: var(--gradient-primary);
 }
 
 .tech-category:hover {
-    border-color: rgba(0, 240, 255, 0.3);
+    border-color: rgba(56, 189, 248, 0.3);
     transform: translateX(5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .category-icon {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--primary);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .tech-category h4 {
-    color: var(--primary);
+    color: var(--text-primary);
     margin-bottom: 10px;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .tech-category p {
     color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.7;
 }
 
 /* Fade In Animation */
@@ -696,17 +785,31 @@ body::before {
     transform: translateY(0);
 }
 
-/* Footer */
+/* Footer - 太空风格 */
 footer {
-    background: rgba(10, 10, 15, 0.95);
-    padding: 50px 0;
+    background: rgba(3, 0, 20, 0.95);
+    padding: 60px 0;
     text-align: center;
-    border-top: 1px solid rgba(0, 240, 255, 0.1);
+    border-top: 1px solid rgba(56, 189, 248, 0.1);
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: var(--gradient-primary);
 }
 
 footer p {
     color: var(--text-secondary);
     margin-bottom: 20px;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
 }
 
 .footer-link {
@@ -715,16 +818,18 @@ footer p {
     gap: 8px;
     color: var(--primary);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .footer-link:hover {
-    text-shadow: var(--glow-primary);
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
 }
 
 .github-icon {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 /* Responsive */
@@ -734,15 +839,15 @@ footer p {
     }
 
     .typewriter {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .section-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .project {
-        padding: 20px;
+        padding: 25px;
     }
 
     .project-badge {
@@ -762,11 +867,15 @@ footer p {
         right: 10px;
         padding: 6px 12px;
     }
+
+    .tech-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-/* Scrollbar */
+/* Scrollbar - 太空风格 */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -774,16 +883,16 @@ footer p {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(0, 240, 255, 0.3);
-    border-radius: 4px;
+    background: rgba(56, 189, 248, 0.3);
+    border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 240, 255, 0.5);
+    background: rgba(56, 189, 248, 0.5);
 }
 
 /* Selection */
 ::selection {
-    background: rgba(0, 240, 255, 0.3);
+    background: rgba(56, 189, 248, 0.3);
     color: var(--text-primary);
 }

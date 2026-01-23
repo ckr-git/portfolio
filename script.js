@@ -31,18 +31,19 @@ function createParticle(container) {
     particle.style.left = Math.random() * 100 + '%';
     particle.style.top = Math.random() * 100 + '%';
 
-    // Random size
-    const size = Math.random() * 3 + 1;
+    // Random size (smaller for stars)
+    const size = Math.random() * 2 + 1;
     particle.style.width = size + 'px';
     particle.style.height = size + 'px';
 
     // Random animation duration
-    particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
-    particle.style.animationDelay = (Math.random() * 10) + 's';
+    particle.style.animationDuration = (Math.random() * 3 + 2) + 's, ' + (Math.random() * 25 + 15) + 's';
+    particle.style.animationDelay = (Math.random() * 3) + 's';
 
-    // Random color (cyan or purple)
+    // Random color (ice blue or purple)
     if (Math.random() > 0.7) {
-        particle.style.background = '#b400ff';
+        particle.style.background = '#a855f7';
+        particle.style.boxShadow = '0 0 6px #a855f7';
     }
 
     container.appendChild(particle);
