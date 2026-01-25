@@ -60,8 +60,8 @@
       "color": "#4a90d9",
       "description": "Customer relationship management system with analytics",
       "descriptionCN": "带数据分析的客户关系管理系统",
-      "techStack": ["React", "Spring Boot", "MySQL", "Redis"],
-      "github": "https://github.com/ckr-git/crm-system",
+      "techStack": ["Vue 3", "Node.js", "Express", "MySQL", "Redis"],
+      "github": "https://github.com/ckr-git/crm-management-system",
       "milestones": [
         {"date": "2024-01", "version": "v1.0", "content": "Core CRM features"},
         {"date": "2024-05", "version": "v2.0", "content": "Analytics dashboard"}
