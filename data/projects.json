@@ -1,0 +1,175 @@
+{
+  "developer": {
+    "name": "Developer",
+    "nameCN": "开发者",
+    "description": "Full-Stack Developer passionate about AI and creative solutions",
+    "descriptionCN": "热爱AI和创意解决方案的全栈开发者",
+    "github": "https://github.com/ckr-git"
+  },
+  "planets": [
+    {
+      "id": "mercury",
+      "name": "Feishu Assistant",
+      "nameCN": "飞书纪要助手",
+      "project": "feishu-minutes-assistant",
+      "complexity": 6,
+      "orbitRadius": 80,
+      "size": 8,
+      "rotationSpeed": 0.02,
+      "orbitSpeed": 0.008,
+      "color": "#8c8c8c",
+      "description": "Automated meeting minutes tool integrated with Feishu API",
+      "descriptionCN": "集成飞书API的自动化会议纪要工具",
+      "techStack": ["Node.js", "TypeScript", "Prisma", "Jest"],
+      "github": null,
+      "milestones": [
+        {"date": "2024-01", "version": "v1.0", "content": "Initial release"},
+        {"date": "2024-03", "version": "v1.2", "content": "Added auto-summary"}
+      ]
+    },
+    {
+      "id": "venus",
+      "name": "Image Batch Processor",
+      "nameCN": "图片批量处理工具",
+      "project": "image-batch-processor",
+      "complexity": 6,
+      "orbitRadius": 110,
+      "size": 12,
+      "rotationSpeed": 0.015,
+      "orbitSpeed": 0.006,
+      "color": "#e6b800",
+      "description": "Batch image processing tool with compression and format conversion",
+      "descriptionCN": "支持压缩和格式转换的批量图片处理工具",
+      "techStack": ["React", "Node.js", "Express", "Sharp"],
+      "github": "https://github.com/ckr-git/image-batch-processor",
+      "milestones": [
+        {"date": "2024-02", "version": "v1.0", "content": "Basic compression"},
+        {"date": "2024-04", "version": "v1.5", "content": "Batch processing"}
+      ]
+    },
+    {
+      "id": "earth",
+      "name": "CRM System",
+      "nameCN": "CRM管理系统",
+      "project": "crm-system",
+      "complexity": 7,
+      "orbitRadius": 150,
+      "size": 13,
+      "rotationSpeed": 0.01,
+      "orbitSpeed": 0.005,
+      "color": "#4a90d9",
+      "description": "Customer relationship management system with analytics",
+      "descriptionCN": "带数据分析的客户关系管理系统",
+      "techStack": ["React", "Spring Boot", "MySQL", "Redis"],
+      "github": "https://github.com/ckr-git/crm-system",
+      "milestones": [
+        {"date": "2024-01", "version": "v1.0", "content": "Core CRM features"},
+        {"date": "2024-05", "version": "v2.0", "content": "Analytics dashboard"}
+      ]
+    },
+    {
+      "id": "mars",
+      "name": "Mental Health System",
+      "nameCN": "智能心理健康系统",
+      "project": "mental-health-system",
+      "complexity": 7,
+      "orbitRadius": 200,
+      "size": 10,
+      "rotationSpeed": 0.008,
+      "orbitSpeed": 0.004,
+      "color": "#c1440e",
+      "description": "AI-powered mental health assessment and management platform",
+      "descriptionCN": "AI驱动的心理健康评估与管理平台",
+      "techStack": ["React", "Spring Boot", "MyBatis-Plus", "AI"],
+      "github": "https://github.com/ckr-git/mental-health-system",
+      "milestones": [
+        {"date": "2024-03", "version": "v1.0", "content": "Assessment module"},
+        {"date": "2024-06", "version": "v1.5", "content": "AI recommendations"}
+      ]
+    },
+    {
+      "id": "jupiter",
+      "name": "AI Image Platform",
+      "nameCN": "AI图像处理平台",
+      "project": "ai-image-platform",
+      "complexity": 9,
+      "orbitRadius": 280,
+      "size": 28,
+      "rotationSpeed": 0.005,
+      "orbitSpeed": 0.003,
+      "color": "#d4a574",
+      "description": "Enterprise AI image processing platform with ComfyUI integration",
+      "descriptionCN": "集成ComfyUI的企业级AI图像处理平台",
+      "techStack": ["React 19", "FastAPI", "ComfyUI", "Celery", "Redis", "Docker"],
+      "github": "https://github.com/ckr-git/ai-image-platform",
+      "isCommercial": true,
+      "milestones": [
+        {"date": "2024-01", "version": "v0.1", "content": "Project inception"},
+        {"date": "2024-03", "version": "v1.0", "content": "Core AI workflows"},
+        {"date": "2024-06", "version": "v2.0", "content": "Multi-tenant support"},
+        {"date": "2024-09", "version": "v2.5", "content": "Production deployment"}
+      ]
+    },
+    {
+      "id": "saturn",
+      "name": "Tea Sales System",
+      "nameCN": "茶叶销售系统",
+      "project": "tea-sales-system",
+      "complexity": 8,
+      "orbitRadius": 360,
+      "size": 24,
+      "rotationSpeed": 0.004,
+      "orbitSpeed": 0.002,
+      "color": "#c9a227",
+      "hasRing": true,
+      "description": "E-commerce platform with collaborative filtering recommendation",
+      "descriptionCN": "带协同过滤推荐算法的电商平台",
+      "techStack": ["React", "Spring Boot", "MyBatis-Plus", "Collaborative Filtering"],
+      "github": null,
+      "milestones": [
+        {"date": "2024-02", "version": "v1.0", "content": "Basic e-commerce"},
+        {"date": "2024-05", "version": "v2.0", "content": "Recommendation engine"}
+      ]
+    },
+    {
+      "id": "uranus",
+      "name": "PDF Toolbox",
+      "nameCN": "PDF工具箱",
+      "project": "pdf-toolbox",
+      "complexity": 7,
+      "orbitRadius": 440,
+      "size": 16,
+      "rotationSpeed": 0.003,
+      "orbitSpeed": 0.0015,
+      "color": "#4fd0e7",
+      "description": "PDF processing toolkit with compression and conversion",
+      "descriptionCN": "支持压缩和转换的PDF处理工具箱",
+      "techStack": ["React", "TypeScript", "Spring Boot", "Ghostscript"],
+      "github": "https://github.com/ckr-git/pdf-toolbox",
+      "milestones": [
+        {"date": "2024-04", "version": "v1.0", "content": "PDF compression"},
+        {"date": "2024-07", "version": "v1.5", "content": "Format conversion"}
+      ]
+    },
+    {
+      "id": "neptune",
+      "name": "Game Community",
+      "nameCN": "游戏社区交流平台",
+      "project": "game-community",
+      "complexity": 7,
+      "orbitRadius": 520,
+      "size": 15,
+      "rotationSpeed": 0.002,
+      "orbitSpeed": 0.001,
+      "color": "#4b70dd",
+      "description": "Gaming community platform with real-time chat",
+      "descriptionCN": "支持实时聊天的游戏社区平台",
+      "techStack": ["React", "Spring Boot", "WebSocket", "STOMP"],
+      "github": "https://github.com/ckr-git/game-community",
+      "milestones": [
+        {"date": "2024-03", "version": "v1.0", "content": "Community features"},
+        {"date": "2024-06", "version": "v2.0", "content": "Real-time chat"}
+      ]
+    }
+  ]
+}
