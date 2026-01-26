@@ -1,18 +1,25 @@
 {
   "developer": {
-    "name": "Developer",
-    "nameCN": "开发者",
-    "description": "Full-Stack Developer passionate about AI and creative solutions",
-    "descriptionCN": "热爱AI和创意解决方案的全栈开发者",
-    "github": "https://github.com/ckr-git"
+    "name": "Kunru Che",
+    "nameCN": "车坤儒",
+    "description": "Full-Stack Developer & Vibe Coding Engineer passionate about AI and creative solutions",
+    "descriptionCN": "热爱AI和创意解决方案的全栈开发者 & Vibe Coding工程师",
+    "github": "https://github.com/ckr-git",
+    "email": "sgshzjsj26517@qq.com",
+    "resume": "车坤儒 - Vibe Coding编码工程师简历.pdf"
+  },
+  "skills": {
+    "frontend": { "React": 8, "Vue": 8, "TypeScript": 8 },
+    "backend": { "Spring Boot": 8, "Node.js": 9, "Python/FastAPI": 9 },
+    "ai": { "ComfyUI": 7, "AI应用开发": 10 },
+    "database": { "MySQL": 9, "Redis": 8 },
+    "other": { "Docker": 8, "Git": 8 }
   },
   "planets": [
     {
       "id": "mercury",
       "name": "Feishu Assistant",
       "nameCN": "飞书纪要助手",
-      "project": "feishu-minutes-assistant",
-      "complexity": 6,
       "orbitRadius": 80,
       "size": 8,
       "rotationSpeed": 0.02,
@@ -22,6 +29,7 @@
       "descriptionCN": "集成飞书API的自动化会议纪要工具",
       "techStack": ["Node.js", "TypeScript", "Prisma", "Jest"],
       "github": null,
+      "screenshot": "images/projects/feishu-meeting-assistant/preview.png",
       "milestones": [
         {"date": "2024-01", "version": "v1.0", "content": "Initial release"},
         {"date": "2024-03", "version": "v1.2", "content": "Added auto-summary"}
@@ -31,8 +39,6 @@
       "id": "venus",
       "name": "Image Batch Processor",
       "nameCN": "图片批量处理工具",
-      "project": "image-batch-processor",
-      "complexity": 6,
       "orbitRadius": 110,
       "size": 12,
       "rotationSpeed": 0.015,
@@ -42,6 +48,7 @@
       "descriptionCN": "支持压缩和格式转换的批量图片处理工具",
       "techStack": ["React", "Node.js", "Express", "Sharp"],
       "github": "https://github.com/ckr-git/image-batch-processor",
+      "screenshot": "images/projects/image-batch-processor/preview.png",
       "milestones": [
         {"date": "2024-02", "version": "v1.0", "content": "Basic compression"},
         {"date": "2024-04", "version": "v1.5", "content": "Batch processing"}
@@ -49,51 +56,47 @@
     },
     {
       "id": "earth",
-      "name": "CRM System",
-      "nameCN": "CRM管理系统",
-      "project": "crm-system",
-      "complexity": 7,
-      "orbitRadius": 150,
+      "name": "Python Tools",
+      "nameCN": "Python工具集",
+      "orbitRadius": 145,
       "size": 13,
       "rotationSpeed": 0.01,
       "orbitSpeed": 0.005,
       "color": "#4a90d9",
+      "description": "Collection of Python utility tools for daily tasks",
+      "descriptionCN": "日常任务Python实用工具集合",
+      "techStack": ["Python", "Tkinter", "PyQt5"],
+      "github": null,
+      "screenshot": "images/projects/python-tools/preview.png",
+      "milestones": [
+        {"date": "2024-01", "version": "v1.0", "content": "Initial tools"},
+        {"date": "2024-05", "version": "v1.5", "content": "Added more utilities"}
+      ]
+    },
+    {
+      "id": "mars",
+      "name": "CRM System",
+      "nameCN": "CRM管理系统",
+      "orbitRadius": 185,
+      "size": 10,
+      "rotationSpeed": 0.008,
+      "orbitSpeed": 0.004,
+      "color": "#c1440e",
       "description": "Customer relationship management system with analytics",
       "descriptionCN": "带数据分析的客户关系管理系统",
       "techStack": ["Vue 3", "Node.js", "Express", "MySQL", "Redis"],
       "github": "https://github.com/ckr-git/crm-management-system",
+      "screenshot": "images/projects/crm-management-system/preview.png",
       "milestones": [
         {"date": "2024-01", "version": "v1.0", "content": "Core CRM features"},
         {"date": "2024-05", "version": "v2.0", "content": "Analytics dashboard"}
       ]
     },
     {
-      "id": "mars",
-      "name": "Mental Health System",
-      "nameCN": "智能心理健康系统",
-      "project": "mental-health-system",
-      "complexity": 7,
-      "orbitRadius": 200,
-      "size": 10,
-      "rotationSpeed": 0.008,
-      "orbitSpeed": 0.004,
-      "color": "#c1440e",
-      "description": "AI-powered mental health assessment and management platform",
-      "descriptionCN": "AI驱动的心理健康评估与管理平台",
-      "techStack": ["React", "Spring Boot", "MyBatis-Plus", "AI"],
-      "github": "https://github.com/ckr-git/mental-health-system",
-      "milestones": [
-        {"date": "2024-03", "version": "v1.0", "content": "Assessment module"},
-        {"date": "2024-06", "version": "v1.5", "content": "AI recommendations"}
-      ]
-    },
-    {
       "id": "jupiter",
       "name": "AI Image Platform",
       "nameCN": "AI图像处理平台",
-      "project": "ai-image-platform",
-      "complexity": 9,
-      "orbitRadius": 280,
+      "orbitRadius": 260,
       "size": 28,
       "rotationSpeed": 0.005,
       "orbitSpeed": 0.003,
@@ -103,6 +106,7 @@
       "techStack": ["React 19", "FastAPI", "ComfyUI", "Celery", "Redis", "Docker"],
       "github": "https://github.com/ckr-git/ai-image-platform",
       "isCommercial": true,
+      "screenshot": "images/projects/AI Image Platform/preview.png",
       "milestones": [
         {"date": "2024-01", "version": "v0.1", "content": "Project inception"},
         {"date": "2024-03", "version": "v1.0", "content": "Core AI workflows"},
@@ -114,9 +118,7 @@
       "id": "saturn",
       "name": "Tea Sales System",
       "nameCN": "茶叶销售系统",
-      "project": "tea-sales-system",
-      "complexity": 8,
-      "orbitRadius": 360,
+      "orbitRadius": 340,
       "size": 24,
       "rotationSpeed": 0.004,
       "orbitSpeed": 0.002,
@@ -126,6 +128,7 @@
       "descriptionCN": "带协同过滤推荐算法的电商平台",
       "techStack": ["React", "Spring Boot", "MyBatis-Plus", "Collaborative Filtering"],
       "github": null,
+      "screenshot": "images/projects/Tea Sales System/preview.png",
       "milestones": [
         {"date": "2024-02", "version": "v1.0", "content": "Basic e-commerce"},
         {"date": "2024-05", "version": "v2.0", "content": "Recommendation engine"}
@@ -135,9 +138,7 @@
       "id": "uranus",
       "name": "PDF Toolbox",
       "nameCN": "PDF工具箱",
-      "project": "pdf-toolbox",
-      "complexity": 7,
-      "orbitRadius": 440,
+      "orbitRadius": 410,
       "size": 16,
       "rotationSpeed": 0.003,
       "orbitSpeed": 0.0015,
@@ -146,6 +147,7 @@
       "descriptionCN": "支持压缩和转换的PDF处理工具箱",
       "techStack": ["React", "TypeScript", "Spring Boot", "Ghostscript"],
       "github": "https://github.com/ckr-git/pdf-toolbox",
+      "screenshot": "images/projects/PDF Toolbox/preview.png",
       "milestones": [
         {"date": "2024-04", "version": "v1.0", "content": "PDF compression"},
         {"date": "2024-07", "version": "v1.5", "content": "Format conversion"}
@@ -155,9 +157,7 @@
       "id": "neptune",
       "name": "Game Community",
       "nameCN": "游戏社区交流平台",
-      "project": "game-community",
-      "complexity": 7,
-      "orbitRadius": 520,
+      "orbitRadius": 480,
       "size": 15,
       "rotationSpeed": 0.002,
       "orbitSpeed": 0.001,
@@ -166,10 +166,166 @@
       "descriptionCN": "支持实时聊天的游戏社区平台",
       "techStack": ["React", "Spring Boot", "WebSocket", "STOMP"],
       "github": "https://github.com/ckr-git/game-community",
+      "screenshot": "images/projects/Game Community/preview.png",
       "milestones": [
         {"date": "2024-03", "version": "v1.0", "content": "Community features"},
         {"date": "2024-06", "version": "v2.0", "content": "Real-time chat"}
       ]
+    },
+    {
+      "id": "pluto",
+      "name": "Mental Health System",
+      "nameCN": "智能心理健康系统",
+      "orbitRadius": 540,
+      "size": 7,
+      "rotationSpeed": 0.0018,
+      "orbitSpeed": 0.0008,
+      "color": "#9b59b6",
+      "description": "AI-powered mental health assessment and management platform",
+      "descriptionCN": "AI驱动的心理健康评估与管理平台",
+      "techStack": ["React", "Spring Boot", "MyBatis-Plus", "AI"],
+      "github": "https://github.com/ckr-git/mental-health-system",
+      "screenshot": "images/projects/mental-health-system/preview.png",
+      "milestones": [
+        {"date": "2024-03", "version": "v1.0", "content": "Assessment module"},
+        {"date": "2024-06", "version": "v1.5", "content": "AI recommendations"}
+      ]
+    },
+    {
+      "id": "eris",
+      "name": "Class Election System",
+      "nameCN": "班级干部评选系统",
+      "orbitRadius": 590,
+      "size": 6,
+      "rotationSpeed": 0.0015,
+      "orbitSpeed": 0.0007,
+      "color": "#e74c3c",
+      "description": "Online voting system for class officer elections",
+      "descriptionCN": "班级干部在线投票评选系统",
+      "techStack": ["Vue 3", "Spring Boot", "MySQL"],
+      "github": null,
+      "screenshot": "images/projects/class-election-system/preview.png",
+      "milestones": [
+        {"date": "2024-04", "version": "v1.0", "content": "Voting system"},
+        {"date": "2024-06", "version": "v1.2", "content": "Statistics dashboard"}
+      ]
+    },
+    {
+      "id": "haumea",
+      "name": "Property Management",
+      "nameCN": "小区物业管理系统",
+      "orbitRadius": 640,
+      "size": 8,
+      "rotationSpeed": 0.0012,
+      "orbitSpeed": 0.0006,
+      "color": "#27ae60",
+      "description": "Community property management system with fee tracking",
+      "descriptionCN": "带费用追踪的小区物业管理系统",
+      "techStack": ["Vue 3", "Spring Boot", "MyBatis-Plus", "MySQL"],
+      "github": null,
+      "screenshot": "images/projects/property-management/preview.png",
+      "milestones": [
+        {"date": "2024-02", "version": "v1.0", "content": "Core management"},
+        {"date": "2024-05", "version": "v1.5", "content": "Fee tracking"}
+      ]
+    },
+    {
+      "id": "makemake",
+      "name": "Stall Management",
+      "nameCN": "摊位管理平台",
+      "orbitRadius": 690,
+      "size": 7,
+      "rotationSpeed": 0.001,
+      "orbitSpeed": 0.0005,
+      "color": "#f39c12",
+      "description": "Market stall rental and management platform",
+      "descriptionCN": "市场摊位租赁与管理平台",
+      "techStack": ["React", "Node.js", "Express", "MongoDB"],
+      "github": null,
+      "screenshot": "images/projects/stall-management/preview.png",
+      "milestones": [
+        {"date": "2024-03", "version": "v1.0", "content": "Stall booking"},
+        {"date": "2024-06", "version": "v1.3", "content": "Payment integration"}
+      ]
+    },
+    {
+      "id": "sedna",
+      "name": "Pharmacy Sales System",
+      "nameCN": "连锁药店销售系统",
+      "orbitRadius": 740,
+      "size": 9,
+      "rotationSpeed": 0.0008,
+      "orbitSpeed": 0.0004,
+      "color": "#1abc9c",
+      "description": "Chain pharmacy POS and inventory management system",
+      "descriptionCN": "连锁药店POS与库存管理系统",
+      "techStack": ["Vue 3", "Spring Boot", "MyBatis-Plus", "Redis"],
+      "github": null,
+      "screenshot": "images/projects/pharmacy-sales-system/preview.png",
+      "milestones": [
+        {"date": "2024-01", "version": "v1.0", "content": "POS system"},
+        {"date": "2024-04", "version": "v2.0", "content": "Multi-store support"}
+      ]
+    },
+    {
+      "id": "quaoar",
+      "name": "Sparrow Sky",
+      "nameCN": "麻雀的天空",
+      "orbitRadius": 790,
+      "size": 6,
+      "rotationSpeed": 0.0006,
+      "orbitSpeed": 0.0003,
+      "color": "#3498db",
+      "description": "Creative interactive storytelling application",
+      "descriptionCN": "创意互动故事应用",
+      "techStack": ["React", "Three.js", "GSAP"],
+      "github": null,
+      "screenshot": "images/projects/sparrow-sky/preview.png",
+      "milestones": [
+        {"date": "2024-05", "version": "v1.0", "content": "Story engine"},
+        {"date": "2024-07", "version": "v1.2", "content": "Interactive elements"}
+      ]
+    },
+    {
+      "id": "orcus",
+      "name": "Ceramic Pattern Assistant",
+      "nameCN": "陶瓷花纹助手",
+      "orbitRadius": 840,
+      "size": 5,
+      "rotationSpeed": 0.0005,
+      "orbitSpeed": 0.00025,
+      "color": "#e67e22",
+      "description": "AI-assisted ceramic pattern design tool",
+      "descriptionCN": "AI辅助陶瓷花纹设计工具",
+      "techStack": ["Python", "FastAPI", "Stable Diffusion", "ComfyUI"],
+      "github": null,
+      "screenshot": "images/projects/ceramic-pattern-assistant/preview.png",
+      "milestones": [
+        {"date": "2024-06", "version": "v1.0", "content": "Pattern generation"},
+        {"date": "2024-08", "version": "v1.5", "content": "Style transfer"}
+      ]
+    }
+  ],
+  "blackholes": [
+    {
+      "id": "blackhole1",
+      "name": "Project Alpha",
+      "nameCN": "神秘项目 Alpha",
+      "position": { "x": -600, "z": 400 },
+      "size": 35,
+      "description": "A mysterious project in development...",
+      "descriptionCN": "开发中的神秘项目...",
+      "status": "in_progress"
+    },
+    {
+      "id": "blackhole2",
+      "name": "Project Beta",
+      "nameCN": "神秘项目 Beta",
+      "position": { "x": 500, "z": -500 },
+      "size": 30,
+      "description": "Another exciting project coming soon...",
+      "descriptionCN": "另一个即将推出的精彩项目...",
+      "status": "in_progress"
     }
   ]
 }

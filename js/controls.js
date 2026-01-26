@@ -6,6 +6,15 @@ const Controls = {
     enabled: true,
     target: new THREE.Vector3(0, 0, 0),
 
+    // Animation
+    isAnimating: false,
+    animationProgress: 0,
+    animationDuration: 60,
+    startTarget: new THREE.Vector3(),
+    endTarget: new THREE.Vector3(),
+    startSpherical: { radius: 0, theta: 0, phi: 0 },
+    endSpherical: { radius: 0, theta: 0, phi: 0 },
+
     // Spherical coordinates
     spherical: {
         radius: 700,
@@ -127,10 +136,44 @@ const Controls = {
     },
 
     focusOnPlanet(planet) {
-        const targetPos = planet.position.clone();
-        this.target.copy(targetPos);
-        this.spherical.radius = 150;
+        // Store start state
+        this.startTarget.copy(this.target);
+        this.startSpherical.radius = this.spherical.radius;
+        this.startSpherical.theta = this.spherical.theta;
+        this.startSpherical.phi = this.spherical.phi;
+
+        // Set end state
+        this.endTarget.copy(planet.position);
+        this.endSpherical.radius = 150;
+        this.endSpherical.theta = this.spherical.theta;
+        this.endSpherical.phi = Math.PI / 3;
+
+        // Start animation
+        this.isAnimating = true;
+        this.animationProgress = 0;
+    },
+
+    updateAnimation() {
+        if (!this.isAnimating) return;
+
+        this.animationProgress++;
+        const t = this.animationProgress / this.animationDuration;
+        const easeT = 1 - Math.pow(1 - t, 3); // easeOutCubic
+
+        // Interpolate target
+        this.target.lerpVectors(this.startTarget, this.endTarget, easeT);
+
+        // Interpolate spherical
+        this.spherical.radius = this.startSpherical.radius +
+            (this.endSpherical.radius - this.startSpherical.radius) * easeT;
+        this.spherical.phi = this.startSpherical.phi +
+            (this.endSpherical.phi - this.startSpherical.phi) * easeT;
+
         this.updateCameraPosition();
+
+        if (this.animationProgress >= this.animationDuration) {
+            this.isAnimating = false;
+        }
     },
 
     resetView() {

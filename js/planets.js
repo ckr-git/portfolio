@@ -5,6 +5,7 @@
 const Planets = {
     data: null,
     objects: [],
+    blackholes: [],
     sun: null,
 
     async load() {
@@ -78,6 +79,63 @@ const Planets = {
                 this.createRing(planet, planetData.size);
             }
         });
+
+        // Create blackholes
+        this.createBlackholes();
+    },
+
+    createBlackholes() {
+        if (!this.data.blackholes) return;
+
+        this.data.blackholes.forEach(bhData => {
+            const group = new THREE.Group();
+
+            // Event horizon (black sphere)
+            const coreGeometry = new THREE.SphereGeometry(bhData.size, 32, 32);
+            const coreMaterial = new THREE.MeshBasicMaterial({
+                color: 0x000000
+            });
+            const core = new THREE.Mesh(coreGeometry, coreMaterial);
+            group.add(core);
+
+            // Accretion disk
+            const diskGeometry = new THREE.RingGeometry(
+                bhData.size * 1.5,
+                bhData.size * 3,
+                64
+            );
+            const diskMaterial = new THREE.MeshBasicMaterial({
+                color: 0xff6600,
+                transparent: true,
+                opacity: 0.7,
+                side: THREE.DoubleSide
+            });
+            const disk = new THREE.Mesh(diskGeometry, diskMaterial);
+            disk.rotation.x = Math.PI / 2.2;
+            group.add(disk);
+
+            // Outer glow
+            const glowGeometry = new THREE.SphereGeometry(bhData.size * 1.2, 32, 32);
+            const glowMaterial = new THREE.MeshBasicMaterial({
+                color: 0x4400ff,
+                transparent: true,
+                opacity: 0.3
+            });
+            const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+            group.add(glow);
+
+            // Position
+            group.position.set(bhData.position.x, 0, bhData.position.z);
+
+            // Store data
+            group.userData = {
+                type: 'blackhole',
+                data: bhData
+            };
+
+            SpaceScene.scene.add(group);
+            this.blackholes.push(group);
+        });
     },
 
     createOrbit(radius) {
@@ -137,6 +195,11 @@ const Planets = {
 
             // Self rotation
             planet.rotation.y += data.rotationSpeed;
+        });
+
+        // Update blackholes
+        this.blackholes.forEach(bh => {
+            bh.rotation.y += 0.005;
         });
     }
 };

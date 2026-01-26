@@ -6,6 +6,7 @@ const SpaceScene = {
     scene: null,
     camera: null,
     renderer: null,
+    meteors: [],
 
     init() {
         // Create scene
@@ -32,6 +33,9 @@ const SpaceScene = {
 
         // Add starfield
         this.addStarfield();
+
+        // Add meteors
+        this.addMeteors();
 
         // Handle resize
         window.addEventListener('resize', () => this.onResize());
@@ -75,6 +79,50 @@ const SpaceScene = {
 
         const stars = new THREE.Points(starsGeometry, starsMaterial);
         this.scene.add(stars);
+    },
+
+    addMeteors() {
+        for (let i = 0; i < 15; i++) {
+            this.createMeteor();
+        }
+    },
+
+    createMeteor() {
+        const points = [];
+        points.push(new THREE.Vector3(0, 0, 0));
+        points.push(new THREE.Vector3(-30, -30, 0));
+
+        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+        const material = new THREE.LineBasicMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: Math.random() * 0.5 + 0.3
+        });
+
+        const meteor = new THREE.Line(geometry, material);
+        this.resetMeteor(meteor);
+        this.scene.add(meteor);
+        this.meteors.push(meteor);
+    },
+
+    resetMeteor(meteor) {
+        meteor.position.set(
+            (Math.random() - 0.5) * 4000,
+            Math.random() * 1500 + 500,
+            (Math.random() - 0.5) * 4000
+        );
+        meteor.userData.speed = Math.random() * 8 + 4;
+    },
+
+    updateMeteors() {
+        this.meteors.forEach(meteor => {
+            meteor.position.x += meteor.userData.speed;
+            meteor.position.y -= meteor.userData.speed;
+
+            if (meteor.position.y < -500) {
+                this.resetMeteor(meteor);
+            }
+        });
     },
 
     onResize() {

@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Portfolio - 3D Solar System</title>
+    <meta name="description" content="Kunru Che's 3D Space Portfolio - Full-Stack Developer & Vibe Coding Engineer">
+    <meta name="keywords" content="portfolio, developer, full-stack, AI, React, Spring Boot">
+    <meta name="author" content="Kunru Che">
+    <meta property="og:title" content="Space Portfolio - Kunru Che">
+    <meta property="og:description" content="Explore my projects in an interactive 3D solar system">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <title>Space Portfolio - Kunru Che</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -59,6 +66,7 @@
             <h2 id="panel-name"></h2>
             <span id="panel-badge" class="badge"></span>
         </div>
+        <div id="panel-screenshot" class="panel-screenshot"></div>
         <p id="panel-desc"></p>
         <div class="panel-section">
             <h4 data-en="Tech Stack" data-zh="技术栈">Tech Stack</h4>
@@ -77,6 +85,32 @@
     <!-- Hover Label -->
     <div id="hover-label" class="hidden"></div>
 
+    <!-- Developer Panel -->
+    <div id="developer-panel" class="hidden">
+        <button class="close-btn" onclick="UI.hideDeveloperPanel()">&times;</button>
+        <div class="panel-header">
+            <h2 id="dev-name"></h2>
+            <span class="badge">Developer</span>
+        </div>
+        <p id="dev-desc"></p>
+        <div class="panel-section">
+            <h4 data-en="Skills" data-zh="技能">Skills</h4>
+            <canvas id="skills-canvas"></canvas>
+        </div>
+        <div class="panel-section">
+            <h4 data-en="Contact" data-zh="联系方式">Contact</h4>
+            <a id="dev-email" class="contact-link" href="#">email</a>
+        </div>
+        <div class="panel-buttons">
+            <a id="dev-github" class="btn" href="https://github.com/ckr-git" target="_blank">
+                <span>⬡</span> GitHub
+            </a>
+            <a id="dev-resume" class="btn" href="#" target="_blank">
+                <span>📄</span> <span data-en="Resume" data-zh="简历">Resume</span>
+            </a>
+        </div>
+    </div>
+
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
@@ -86,6 +120,7 @@
     <script src="js/controls.js"></script>
     <script src="js/spaceship.js"></script>
     <script src="js/ui.js"></script>
+    <script src="js/tutorial.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

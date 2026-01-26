@@ -228,10 +228,28 @@ body.spaceship-mode { cursor: crosshair; }
     color: var(--secondary);
 }
 
+.badge.in-progress {
+    background: rgba(255, 102, 0, 0.2);
+    color: #ff6600;
+}
+
 #panel-desc {
     color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 20px;
+}
+
+/* Screenshot */
+.panel-screenshot {
+    margin-bottom: 15px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.panel-screenshot img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .panel-section {
@@ -358,4 +376,116 @@ body.spaceship-mode { cursor: crosshair; }
     .mode-switcher { flex-direction: column; }
     #planet-panel { width: 90%; right: 5%; }
     #minimap { width: 120px; height: 120px; }
+}
+
+/* Developer Panel */
+#developer-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    max-height: 85vh;
+    background: var(--bg-panel);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 8px;
+    padding: 25px;
+    z-index: 200;
+    overflow-y: auto;
+    backdrop-filter: blur(15px);
+}
+
+#skills-canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+.contact-link {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}
+
+.panel-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Tutorial */
+#tutorial-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9000;
+    transition: opacity 0.5s;
+}
+
+#tutorial-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tutorial-box {
+    background: var(--bg-panel);
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    padding: 30px 40px;
+    max-width: 400px;
+    text-align: center;
+}
+
+#tutorial-text {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.tutorial-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+#tutorial-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-secondary);
+}
+
+.dot.active {
+    background: var(--primary);
+}
+
+#tutorial-next {
+    background: var(--primary);
+    color: var(--bg-dark);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#tutorial-skip {
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    cursor: pointer;
+}
+
+#tutorial-skip:hover {
+    color: var(--primary);
 }

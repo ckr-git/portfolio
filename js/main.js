@@ -31,6 +31,9 @@ const App = {
         // Hide loading screen
         UI.hideLoading();
 
+        // Initialize tutorial
+        Tutorial.init();
+
         // Start animation loop
         this.animate();
     },
@@ -49,13 +52,17 @@ const App = {
 
         // Raycast
         this.raycaster.setFromCamera(this.mouse, SpaceScene.camera);
-        const allObjects = [Planets.sun, ...Planets.objects];
-        const intersects = this.raycaster.intersectObjects(allObjects);
+        const allObjects = [Planets.sun, ...Planets.objects, ...Planets.blackholes];
+        const intersects = this.raycaster.intersectObjects(allObjects, true);
 
         if (intersects.length > 0) {
-            const obj = intersects[0].object;
+            let obj = intersects[0].object;
+            // Handle group objects (blackholes)
+            if (obj.parent && obj.parent.userData && obj.parent.userData.type) {
+                obj = obj.parent;
+            }
 
-            if (obj !== this.hoveredObject) {
+            if (obj !== this.hoveredObject && obj.userData && obj.userData.data) {
                 this.hoveredObject = obj;
                 const data = obj.userData.data;
                 const name = UI.currentLang === 'zh' ?
@@ -77,27 +84,23 @@ const App = {
         if (Spaceship.enabled) return;
 
         this.raycaster.setFromCamera(this.mouse, SpaceScene.camera);
-        const allObjects = [Planets.sun, ...Planets.objects];
-        const intersects = this.raycaster.intersectObjects(allObjects);
+        const allObjects = [Planets.sun, ...Planets.objects, ...Planets.blackholes];
+        const intersects = this.raycaster.intersectObjects(allObjects, true);
 
         if (intersects.length > 0) {
-            const obj = intersects[0].object;
+            let obj = intersects[0].object;
+            // Handle group objects (blackholes)
+            if (obj.parent && obj.parent.userData && obj.parent.userData.type) {
+                obj = obj.parent;
+            }
+
+            if (!obj.userData || !obj.userData.data) return;
             const data = obj.userData.data;
 
             if (obj.userData.type === 'sun') {
-                // Show developer info
-                UI.showPanel({
-                    name: data.name,
-                    nameCN: data.nameCN,
-                    description: data.description,
-                    descriptionCN: data.descriptionCN,
-                    techStack: ['Full-Stack', 'AI', 'React', 'Spring Boot'],
-                    milestones: [
-                        { date: '2023', version: '', content: 'Started coding journey' },
-                        { date: '2024', version: '', content: 'Building amazing projects' }
-                    ],
-                    github: data.github
-                });
+                UI.showDeveloperPanel(data);
+            } else if (obj.userData.type === 'blackhole') {
+                UI.showPanel(data);
             } else {
                 UI.showPanel(data);
                 Controls.focusOnPlanet(obj);
@@ -113,6 +116,12 @@ const App = {
 
         // Update spaceship
         Spaceship.update();
+
+        // Update camera animation
+        Controls.updateAnimation();
+
+        // Update meteors
+        SpaceScene.updateMeteors();
 
         // Update minimap
         UI.updateMinimap();

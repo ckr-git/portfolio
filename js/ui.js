@@ -8,6 +8,8 @@ const UI = {
     hoverLabel: null,
     minimap: null,
     minimapCtx: null,
+    skillsCanvas: null,
+    skillsCtx: null,
 
     init() {
         this.panel = document.getElementById('planet-panel');
@@ -82,9 +84,21 @@ const UI = {
         document.getElementById('panel-desc').textContent =
             isZh ? data.descriptionCN : data.description;
 
+        // Screenshot
+        const screenshotContainer = document.getElementById('panel-screenshot');
+        if (data.screenshot && screenshotContainer) {
+            screenshotContainer.innerHTML = `<img src="${data.screenshot}" alt="${data.name}" onerror="this.parentElement.style.display='none'">`;
+            screenshotContainer.style.display = 'block';
+        } else if (screenshotContainer) {
+            screenshotContainer.style.display = 'none';
+        }
+
         // Badge
         const badge = document.getElementById('panel-badge');
-        if (data.isCommercial) {
+        if (data.status === 'in_progress') {
+            badge.textContent = isZh ? '开发中' : 'In Progress';
+            badge.className = 'badge in-progress';
+        } else if (data.isCommercial) {
             badge.textContent = isZh ? '商业项目' : 'Commercial';
             badge.className = 'badge commercial';
         } else {
@@ -191,5 +205,125 @@ const UI = {
         const loading = document.getElementById('loading');
         loading.classList.add('fade-out');
         setTimeout(() => loading.style.display = 'none', 500);
+    },
+
+    showDeveloperPanel(data) {
+        const isZh = this.currentLang === 'zh';
+        const devPanel = document.getElementById('developer-panel');
+        if (!devPanel) return;
+
+        document.getElementById('dev-name').textContent =
+            isZh ? data.nameCN : data.name;
+        document.getElementById('dev-desc').textContent =
+            isZh ? data.descriptionCN : data.description;
+        document.getElementById('dev-email').textContent = data.email;
+        document.getElementById('dev-email').href = 'mailto:' + data.email;
+
+        const resumeBtn = document.getElementById('dev-resume');
+        if (data.resume && resumeBtn) {
+            resumeBtn.href = data.resume;
+            resumeBtn.classList.remove('hidden');
+        }
+
+        this.drawSkillsRadar();
+        devPanel.classList.remove('hidden');
+    },
+
+    hideDeveloperPanel() {
+        const devPanel = document.getElementById('developer-panel');
+        if (devPanel) devPanel.classList.add('hidden');
+    },
+
+    drawSkillsRadar() {
+        const canvas = document.getElementById('skills-canvas');
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        const w = canvas.width = 280;
+        const h = canvas.height = 280;
+        const cx = w / 2;
+        const cy = h / 2;
+        const maxR = 100;
+
+        ctx.clearRect(0, 0, w, h);
+
+        const skills = Planets.data.skills;
+        const allSkills = [];
+
+        Object.entries(skills).forEach(([category, items]) => {
+            Object.entries(items).forEach(([name, value]) => {
+                allSkills.push({ name, value, category });
+            });
+        });
+
+        const count = allSkills.length;
+        const angleStep = (Math.PI * 2) / count;
+
+        // Draw grid
+        for (let r = 2; r <= 10; r += 2) {
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.2)';
+            for (let i = 0; i <= count; i++) {
+                const angle = i * angleStep - Math.PI / 2;
+                const radius = (r / 10) * maxR;
+                const x = cx + Math.cos(angle) * radius;
+                const y = cy + Math.sin(angle) * radius;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+
+        // Draw axes
+        allSkills.forEach((skill, i) => {
+            const angle = i * angleStep - Math.PI / 2;
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(cx + Math.cos(angle) * maxR, cy + Math.sin(angle) * maxR);
+            ctx.stroke();
+
+            // Labels
+            const labelR = maxR + 25;
+            const lx = cx + Math.cos(angle) * labelR;
+            const ly = cy + Math.sin(angle) * labelR;
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '10px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(skill.name, lx, ly);
+        });
+
+        // Draw data
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2;
+
+        allSkills.forEach((skill, i) => {
+            const angle = i * angleStep - Math.PI / 2;
+            const r = (skill.value / 10) * maxR;
+            const x = cx + Math.cos(angle) * r;
+            const y = cy + Math.sin(angle) * r;
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Draw points
+        allSkills.forEach((skill, i) => {
+            const angle = i * angleStep - Math.PI / 2;
+            const r = (skill.value / 10) * maxR;
+            const x = cx + Math.cos(angle) * r;
+            const y = cy + Math.sin(angle) * r;
+
+            ctx.beginPath();
+            ctx.fillStyle = '#38bdf8';
+            ctx.arc(x, y, 4, 0, Math.PI * 2);
+            ctx.fill();
+        });
     }
 };
