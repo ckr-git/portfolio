@@ -14,52 +14,97 @@ const Planets = {
     },
 
     createSun() {
-        const geometry = new THREE.SphereGeometry(50, 32, 32);
+        const group = new THREE.Group();
+
+        // Core sun
+        const geometry = new THREE.SphereGeometry(50, 64, 64);
         const material = new THREE.MeshBasicMaterial({
+            color: 0xffcc00,
+            transparent: true,
+            opacity: 1
+        });
+        const core = new THREE.Mesh(geometry, material);
+        group.add(core);
+
+        // Inner glow layer
+        const glow1Geometry = new THREE.SphereGeometry(54, 32, 32);
+        const glow1Material = new THREE.MeshBasicMaterial({
             color: 0xffaa00,
             transparent: true,
-            opacity: 0.9
+            opacity: 0.6
         });
+        const glow1 = new THREE.Mesh(glow1Geometry, glow1Material);
+        group.add(glow1);
 
-        this.sun = new THREE.Mesh(geometry, material);
-        SpaceScene.scene.add(this.sun);
-
-        // Sun glow
-        const glowGeometry = new THREE.SphereGeometry(55, 32, 32);
-        const glowMaterial = new THREE.MeshBasicMaterial({
-            color: 0xffdd44,
+        // Middle glow layer
+        const glow2Geometry = new THREE.SphereGeometry(60, 32, 32);
+        const glow2Material = new THREE.MeshBasicMaterial({
+            color: 0xff8800,
             transparent: true,
-            opacity: 0.3
+            opacity: 0.35
         });
-        const glow = new THREE.Mesh(glowGeometry, glowMaterial);
-        this.sun.add(glow);
+        const glow2 = new THREE.Mesh(glow2Geometry, glow2Material);
+        group.add(glow2);
 
-        // Store developer data
-        this.sun.userData = {
+        // Outer corona
+        const glow3Geometry = new THREE.SphereGeometry(70, 32, 32);
+        const glow3Material = new THREE.MeshBasicMaterial({
+            color: 0xff6600,
+            transparent: true,
+            opacity: 0.15
+        });
+        const glow3 = new THREE.Mesh(glow3Geometry, glow3Material);
+        group.add(glow3);
+
+        // Store for animation
+        group.userData = {
             type: 'sun',
-            data: this.data.developer
+            data: this.data.developer,
+            glowLayers: [glow1, glow2, glow3],
+            pulsePhase: 0
         };
+
+        this.sun = group;
+        SpaceScene.scene.add(group);
     },
 
     createPlanets() {
         this.data.planets.forEach((planetData, index) => {
-            // Create planet mesh
-            const geometry = new THREE.SphereGeometry(planetData.size, 32, 32);
+            const group = new THREE.Group();
+
+            // Create planet mesh with enhanced material
+            const geometry = new THREE.SphereGeometry(planetData.size, 48, 48);
             const material = new THREE.MeshStandardMaterial({
                 color: planetData.color,
-                roughness: 0.7,
-                metalness: 0.3
+                roughness: 0.6,
+                metalness: 0.2,
+                emissive: planetData.color,
+                emissiveIntensity: 0.05
             });
 
             const planet = new THREE.Mesh(geometry, material);
+            group.add(planet);
+
+            // Add rim light glow for larger planets
+            if (planetData.size >= 10) {
+                const rimGeometry = new THREE.SphereGeometry(planetData.size * 1.08, 32, 32);
+                const rimMaterial = new THREE.MeshBasicMaterial({
+                    color: planetData.color,
+                    transparent: true,
+                    opacity: 0.15,
+                    side: THREE.BackSide
+                });
+                const rim = new THREE.Mesh(rimGeometry, rimMaterial);
+                group.add(rim);
+            }
 
             // Set initial position on orbit
             const angle = (index / this.data.planets.length) * Math.PI * 2;
-            planet.position.x = Math.cos(angle) * planetData.orbitRadius;
-            planet.position.z = Math.sin(angle) * planetData.orbitRadius;
+            group.position.x = Math.cos(angle) * planetData.orbitRadius;
+            group.position.z = Math.sin(angle) * planetData.orbitRadius;
 
             // Store planet data
-            planet.userData = {
+            group.userData = {
                 type: 'planet',
                 data: planetData,
                 angle: angle,
@@ -68,15 +113,15 @@ const Planets = {
                 rotationSpeed: planetData.rotationSpeed
             };
 
-            SpaceScene.scene.add(planet);
-            this.objects.push(planet);
+            SpaceScene.scene.add(group);
+            this.objects.push(group);
 
             // Create orbit ring
-            this.createOrbit(planetData.orbitRadius);
+            this.createOrbit(planetData.orbitRadius, index);
 
             // Create Saturn's ring if needed
             if (planetData.hasRing) {
-                this.createRing(planet, planetData.size);
+                this.createRing(group, planetData.size);
             }
         });
 
@@ -98,31 +143,57 @@ const Planets = {
             const core = new THREE.Mesh(coreGeometry, coreMaterial);
             group.add(core);
 
-            // Accretion disk
-            const diskGeometry = new THREE.RingGeometry(
-                bhData.size * 1.5,
-                bhData.size * 3,
+            // Inner accretion disk (hot orange-white)
+            const disk1Geometry = new THREE.RingGeometry(
+                bhData.size * 1.3,
+                bhData.size * 2,
                 64
             );
-            const diskMaterial = new THREE.MeshBasicMaterial({
-                color: 0xff6600,
+            const disk1Material = new THREE.MeshBasicMaterial({
+                color: 0xffaa44,
                 transparent: true,
-                opacity: 0.7,
+                opacity: 0.8,
                 side: THREE.DoubleSide
             });
-            const disk = new THREE.Mesh(diskGeometry, diskMaterial);
-            disk.rotation.x = Math.PI / 2.2;
-            group.add(disk);
+            const disk1 = new THREE.Mesh(disk1Geometry, disk1Material);
+            disk1.rotation.x = Math.PI / 2.2;
+            group.add(disk1);
 
-            // Outer glow
-            const glowGeometry = new THREE.SphereGeometry(bhData.size * 1.2, 32, 32);
-            const glowMaterial = new THREE.MeshBasicMaterial({
-                color: 0x4400ff,
+            // Outer accretion disk (cooler orange-red)
+            const disk2Geometry = new THREE.RingGeometry(
+                bhData.size * 2,
+                bhData.size * 3.5,
+                64
+            );
+            const disk2Material = new THREE.MeshBasicMaterial({
+                color: 0xff6622,
                 transparent: true,
-                opacity: 0.3
+                opacity: 0.5,
+                side: THREE.DoubleSide
+            });
+            const disk2 = new THREE.Mesh(disk2Geometry, disk2Material);
+            disk2.rotation.x = Math.PI / 2.2;
+            group.add(disk2);
+
+            // Gravitational lensing glow (purple-blue)
+            const glowGeometry = new THREE.SphereGeometry(bhData.size * 1.15, 32, 32);
+            const glowMaterial = new THREE.MeshBasicMaterial({
+                color: 0x6622ff,
+                transparent: true,
+                opacity: 0.4
             });
             const glow = new THREE.Mesh(glowGeometry, glowMaterial);
             group.add(glow);
+
+            // Outer halo
+            const haloGeometry = new THREE.SphereGeometry(bhData.size * 1.4, 32, 32);
+            const haloMaterial = new THREE.MeshBasicMaterial({
+                color: 0x4400aa,
+                transparent: true,
+                opacity: 0.15
+            });
+            const halo = new THREE.Mesh(haloGeometry, haloMaterial);
+            group.add(halo);
 
             // Position
             group.position.set(bhData.position.x, 0, bhData.position.z);
@@ -130,7 +201,8 @@ const Planets = {
             // Store data
             group.userData = {
                 type: 'blackhole',
-                data: bhData
+                data: bhData,
+                disks: [disk1, disk2]
             };
 
             SpaceScene.scene.add(group);
@@ -138,7 +210,7 @@ const Planets = {
         });
     },
 
-    createOrbit(radius) {
+    createOrbit(radius, index = 0) {
         const points = [];
         const segments = 128;
 
@@ -152,10 +224,15 @@ const Planets = {
         }
 
         const geometry = new THREE.BufferGeometry().setFromPoints(points);
+
+        // Gradient color based on orbit distance
+        const hue = 0.55 + (index / 15) * 0.15; // cyan to purple
+        const color = new THREE.Color().setHSL(hue, 0.8, 0.5);
+
         const material = new THREE.LineBasicMaterial({
-            color: 0x38bdf8,
+            color: color,
             transparent: true,
-            opacity: 0.2
+            opacity: 0.25
         });
 
         const orbit = new THREE.Line(geometry, material);
@@ -163,25 +240,52 @@ const Planets = {
     },
 
     createRing(planet, planetSize) {
-        const innerRadius = planetSize * 1.4;
-        const outerRadius = planetSize * 2.2;
-        const geometry = new THREE.RingGeometry(innerRadius, outerRadius, 64);
-        const material = new THREE.MeshBasicMaterial({
-            color: 0xc9a227,
+        // Inner ring (brighter)
+        const inner1 = planetSize * 1.3;
+        const outer1 = planetSize * 1.7;
+        const ring1Geometry = new THREE.RingGeometry(inner1, outer1, 64);
+        const ring1Material = new THREE.MeshBasicMaterial({
+            color: 0xddc060,
             transparent: true,
-            opacity: 0.6,
+            opacity: 0.7,
             side: THREE.DoubleSide
         });
+        const ring1 = new THREE.Mesh(ring1Geometry, ring1Material);
+        ring1.rotation.x = Math.PI / 2.5;
+        planet.add(ring1);
 
-        const ring = new THREE.Mesh(geometry, material);
-        ring.rotation.x = Math.PI / 2.5;
-        planet.add(ring);
+        // Outer ring (dimmer)
+        const inner2 = planetSize * 1.8;
+        const outer2 = planetSize * 2.4;
+        const ring2Geometry = new THREE.RingGeometry(inner2, outer2, 64);
+        const ring2Material = new THREE.MeshBasicMaterial({
+            color: 0xaa9040,
+            transparent: true,
+            opacity: 0.4,
+            side: THREE.DoubleSide
+        });
+        const ring2 = new THREE.Mesh(ring2Geometry, ring2Material);
+        ring2.rotation.x = Math.PI / 2.5;
+        planet.add(ring2);
     },
 
     update() {
-        // Rotate sun
+        // Rotate sun with pulse effect
         if (this.sun) {
             this.sun.rotation.y += 0.002;
+
+            // Pulse animation for glow layers
+            if (this.sun.userData.glowLayers) {
+                this.sun.userData.pulsePhase += 0.02;
+                const pulse = Math.sin(this.sun.userData.pulsePhase);
+
+                this.sun.userData.glowLayers.forEach((glow, i) => {
+                    const baseScale = 1 + i * 0.08;
+                    const pulseAmount = 0.02 * (i + 1);
+                    const scale = baseScale + pulse * pulseAmount;
+                    glow.scale.setScalar(scale);
+                });
+            }
         }
 
         // Update planets
@@ -197,9 +301,15 @@ const Planets = {
             planet.rotation.y += data.rotationSpeed;
         });
 
-        // Update blackholes
+        // Update blackholes with disk rotation
         this.blackholes.forEach(bh => {
-            bh.rotation.y += 0.005;
+            bh.rotation.y += 0.008;
+
+            // Rotate disks at different speeds
+            if (bh.userData.disks) {
+                bh.userData.disks[0].rotation.z += 0.015;
+                bh.userData.disks[1].rotation.z += 0.008;
+            }
         });
     }
 };
