@@ -10,6 +10,8 @@ const UI = {
     minimapCtx: null,
     skillsCanvas: null,
     skillsCtx: null,
+    currentScreenshots: [],
+    currentScreenshotIndex: 0,
 
     init() {
         this.panel = document.getElementById('planet-panel');
@@ -84,11 +86,12 @@ const UI = {
         document.getElementById('panel-desc').textContent =
             isZh ? data.descriptionCN : data.description;
 
-        // Screenshot
+        // Screenshots gallery
         const screenshotContainer = document.getElementById('panel-screenshot');
-        if (data.screenshot && screenshotContainer) {
-            screenshotContainer.innerHTML = `<img src="${data.screenshot}" alt="${data.name}" onerror="this.parentElement.style.display='none'">`;
-            screenshotContainer.style.display = 'block';
+        if (data.screenshots && data.screenshots.length > 0 && screenshotContainer) {
+            this.currentScreenshots = data.screenshots;
+            this.currentScreenshotIndex = 0;
+            this.renderScreenshotGallery(screenshotContainer, data.name);
         } else if (screenshotContainer) {
             screenshotContainer.style.display = 'none';
         }
@@ -137,6 +140,50 @@ const UI = {
 
     hidePanel() {
         this.panel.classList.add('hidden');
+    },
+
+    renderScreenshotGallery(container, altText) {
+        const screenshots = this.currentScreenshots;
+        const index = this.currentScreenshotIndex;
+        const hasMultiple = screenshots.length > 1;
+
+        let html = `<div class="gallery-wrapper">`;
+        html += `<img src="${screenshots[index]}" alt="${altText}" onerror="this.parentElement.parentElement.style.display='none'">`;
+
+        if (hasMultiple) {
+            html += `<button class="gallery-btn gallery-prev" onclick="UI.prevScreenshot()">&#10094;</button>`;
+            html += `<button class="gallery-btn gallery-next" onclick="UI.nextScreenshot()">&#10095;</button>`;
+            html += `<div class="gallery-dots">`;
+            for (let i = 0; i < screenshots.length; i++) {
+                html += `<span class="gallery-dot ${i === index ? 'active' : ''}" onclick="UI.goToScreenshot(${i})"></span>`;
+            }
+            html += `</div>`;
+            html += `<div class="gallery-counter">${index + 1} / ${screenshots.length}</div>`;
+        }
+
+        html += `</div>`;
+        container.innerHTML = html;
+        container.style.display = 'block';
+    },
+
+    prevScreenshot() {
+        if (this.currentScreenshots.length <= 1) return;
+        this.currentScreenshotIndex = (this.currentScreenshotIndex - 1 + this.currentScreenshots.length) % this.currentScreenshots.length;
+        const container = document.getElementById('panel-screenshot');
+        if (container) this.renderScreenshotGallery(container, '');
+    },
+
+    nextScreenshot() {
+        if (this.currentScreenshots.length <= 1) return;
+        this.currentScreenshotIndex = (this.currentScreenshotIndex + 1) % this.currentScreenshots.length;
+        const container = document.getElementById('panel-screenshot');
+        if (container) this.renderScreenshotGallery(container, '');
+    },
+
+    goToScreenshot(index) {
+        this.currentScreenshotIndex = index;
+        const container = document.getElementById('panel-screenshot');
+        if (container) this.renderScreenshotGallery(container, '');
     },
 
     showHoverLabel(text, x, y) {
