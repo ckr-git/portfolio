@@ -29,7 +29,7 @@
       "descriptionCN": "集成飞书API的自动化会议纪要工具",
       "techStack": ["Node.js", "TypeScript", "Prisma", "Jest"],
       "github": null,
-      "screenshot": "images/projects/feishu-meeting-assistant/preview.png",
+      "screenshot": "images/projects/feishu-meeting-assistant/微信图片_20251030211642_68_214.jpg",
       "milestones": [
         {"date": "2024-01", "version": "v1.0", "content": "Initial release"},
         {"date": "2024-03", "version": "v1.2", "content": "Added auto-summary"}
@@ -48,7 +48,7 @@
       "descriptionCN": "支持压缩和格式转换的批量图片处理工具",
       "techStack": ["React", "Node.js", "Express", "Sharp"],
       "github": "https://github.com/ckr-git/image-batch-processor",
-      "screenshot": "images/projects/image-batch-processor/preview.png",
+      "screenshot": "images/projects/image-batch-processor/屏幕截图 2026-01-27 011057.png",
       "milestones": [
         {"date": "2024-02", "version": "v1.0", "content": "Basic compression"},
         {"date": "2024-04", "version": "v1.5", "content": "Batch processing"}
@@ -67,7 +67,7 @@
       "descriptionCN": "日常任务Python实用工具集合",
       "techStack": ["Python", "Tkinter", "PyQt5"],
       "github": null,
-      "screenshot": "images/projects/python-tools/preview.png",
+      "screenshot": "images/projects/python-tools/屏幕截图 2026-01-25 184841.png",
       "milestones": [
         {"date": "2024-01", "version": "v1.0", "content": "Initial tools"},
         {"date": "2024-05", "version": "v1.5", "content": "Added more utilities"}
@@ -86,7 +86,7 @@
       "descriptionCN": "带数据分析的客户关系管理系统",
       "techStack": ["Vue 3", "Node.js", "Express", "MySQL", "Redis"],
       "github": "https://github.com/ckr-git/crm-management-system",
-      "screenshot": "images/projects/crm-management-system/preview.png",
+      "screenshot": "images/projects/crm-management-system/屏幕截图 2026-01-26 153839.png",
       "milestones": [
         {"date": "2024-01", "version": "v1.0", "content": "Core CRM features"},
         {"date": "2024-05", "version": "v2.0", "content": "Analytics dashboard"}
@@ -106,7 +106,7 @@
       "techStack": ["React 19", "FastAPI", "ComfyUI", "Celery", "Redis", "Docker"],
       "github": "https://github.com/ckr-git/ai-image-platform",
       "isCommercial": true,
-      "screenshot": "images/projects/AI Image Platform/preview.png",
+      "screenshot": "images/projects/AI Image Platform/屏幕截图 2026-01-25 200512.png",
       "milestones": [
         {"date": "2024-01", "version": "v0.1", "content": "Project inception"},
         {"date": "2024-03", "version": "v1.0", "content": "Core AI workflows"},
@@ -128,7 +128,7 @@
       "descriptionCN": "带协同过滤推荐算法的电商平台",
       "techStack": ["React", "Spring Boot", "MyBatis-Plus", "Collaborative Filtering"],
       "github": null,
-      "screenshot": "images/projects/Tea Sales System/preview.png",
+      "screenshot": "images/projects/Tea Sales System/屏幕截图 2026-01-25 234707.png",
       "milestones": [
         {"date": "2024-02", "version": "v1.0", "content": "Basic e-commerce"},
         {"date": "2024-05", "version": "v2.0", "content": "Recommendation engine"}
@@ -147,7 +147,7 @@
       "descriptionCN": "支持压缩和转换的PDF处理工具箱",
       "techStack": ["React", "TypeScript", "Spring Boot", "Ghostscript"],
       "github": "https://github.com/ckr-git/pdf-toolbox",
-      "screenshot": "images/projects/PDF Toolbox/preview.png",
+      "screenshot": "images/projects/PDF Toolbox/屏幕截图 2026-01-25 210303.png",
       "milestones": [
         {"date": "2024-04", "version": "v1.0", "content": "PDF compression"},
         {"date": "2024-07", "version": "v1.5", "content": "Format conversion"}
@@ -166,7 +166,7 @@
       "descriptionCN": "支持实时聊天的游戏社区平台",
       "techStack": ["React", "Spring Boot", "WebSocket", "STOMP"],
       "github": "https://github.com/ckr-git/game-community",
-      "screenshot": "images/projects/Game Community/preview.png",
+      "screenshot": "images/projects/Game Community/屏幕截图 2026-01-25 205046.png",
       "milestones": [
         {"date": "2024-03", "version": "v1.0", "content": "Community features"},
         {"date": "2024-06", "version": "v2.0", "content": "Real-time chat"}
@@ -185,7 +185,7 @@
       "descriptionCN": "AI驱动的心理健康评估与管理平台",
       "techStack": ["React", "Spring Boot", "MyBatis-Plus", "AI"],
       "github": "https://github.com/ckr-git/mental-health-system",
-      "screenshot": "images/projects/mental-health-system/preview.png",
+      "screenshot": "images/projects/mental-health-system/屏幕截图 2026-01-26 142337.png",
       "milestones": [
         {"date": "2024-03", "version": "v1.0", "content": "Assessment module"},
         {"date": "2024-06", "version": "v1.5", "content": "AI recommendations"}
@@ -204,7 +204,7 @@
       "descriptionCN": "班级干部在线投票评选系统",
       "techStack": ["Vue 3", "Spring Boot", "MySQL"],
       "github": null,
-      "screenshot": "images/projects/class-election-system/preview.png",
+      "screenshot": "images/projects/class-election-system/屏幕截图 2026-01-26 161508.png",
       "milestones": [
         {"date": "2024-04", "version": "v1.0", "content": "Voting system"},
         {"date": "2024-06", "version": "v1.2", "content": "Statistics dashboard"}
@@ -223,7 +223,7 @@
       "descriptionCN": "带费用追踪的小区物业管理系统",
       "techStack": ["Vue 3", "Spring Boot", "MyBatis-Plus", "MySQL"],
       "github": null,
-      "screenshot": "images/projects/property-management/preview.png",
+      "screenshot": "images/projects/property-management/屏幕截图 2026-01-26 235631.png",
       "milestones": [
         {"date": "2024-02", "version": "v1.0", "content": "Core management"},
         {"date": "2024-05", "version": "v1.5", "content": "Fee tracking"}
@@ -242,7 +242,7 @@
       "descriptionCN": "市场摊位租赁与管理平台",
       "techStack": ["React", "Node.js", "Express", "MongoDB"],
       "github": null,
-      "screenshot": "images/projects/stall-management/preview.png",
+      "screenshot": "images/projects/stall-management/屏幕截图 2026-01-26 204948.png",
       "milestones": [
         {"date": "2024-03", "version": "v1.0", "content": "Stall booking"},
         {"date": "2024-06", "version": "v1.3", "content": "Payment integration"}
@@ -261,7 +261,7 @@
       "descriptionCN": "连锁药店POS与库存管理系统",
       "techStack": ["Vue 3", "Spring Boot", "MyBatis-Plus", "Redis"],
       "github": null,
-      "screenshot": "images/projects/pharmacy-sales-system/preview.png",
+      "screenshot": "images/projects/pharmacy-sales-system/屏幕截图 2026-01-12 211913.png",
       "milestones": [
         {"date": "2024-01", "version": "v1.0", "content": "POS system"},
         {"date": "2024-04", "version": "v2.0", "content": "Multi-store support"}
@@ -280,7 +280,7 @@
       "descriptionCN": "创意互动故事应用",
       "techStack": ["React", "Three.js", "GSAP"],
       "github": null,
-      "screenshot": "images/projects/sparrow-sky/preview.png",
+      "screenshot": "images/projects/sparrow-sky/屏幕截图 2026-01-26 163011.png",
       "milestones": [
         {"date": "2024-05", "version": "v1.0", "content": "Story engine"},
         {"date": "2024-07", "version": "v1.2", "content": "Interactive elements"}
@@ -299,7 +299,7 @@
       "descriptionCN": "AI辅助陶瓷花纹设计工具",
       "techStack": ["Python", "FastAPI", "Stable Diffusion", "ComfyUI"],
       "github": null,
-      "screenshot": "images/projects/ceramic-pattern-assistant/preview.png",
+      "screenshot": "images/projects/ceramic-pattern-assistant/主页.png",
       "milestones": [
         {"date": "2024-06", "version": "v1.0", "content": "Pattern generation"},
         {"date": "2024-08", "version": "v1.5", "content": "Style transfer"}
