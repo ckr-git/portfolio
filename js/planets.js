@@ -7,6 +7,7 @@ const Planets = {
     objects: [],
     blackholes: [],
     sun: null,
+    paused: false,
 
     async load() {
         const response = await fetch('data/projects.json');
@@ -76,10 +77,10 @@ const Planets = {
             const geometry = new THREE.SphereGeometry(planetData.size, 48, 48);
             const material = new THREE.MeshStandardMaterial({
                 color: planetData.color,
-                roughness: 0.6,
-                metalness: 0.2,
+                roughness: 0.55,
+                metalness: 0.15,
                 emissive: planetData.color,
-                emissiveIntensity: 0.05
+                emissiveIntensity: 0.08
             });
 
             const planet = new THREE.Mesh(geometry, material);
@@ -113,11 +114,16 @@ const Planets = {
                 rotationSpeed: planetData.rotationSpeed
             };
 
+            // Add featured ring for highlighted projects (golden glow)
+            if (planetData.featured) {
+                this.createFeaturedRing(group, planetData.size);
+            }
+
+            // Add atmosphere effect for all planets
+            this.createAtmosphere(group, planetData.size, planetData.color);
+
             SpaceScene.scene.add(group);
             this.objects.push(group);
-
-            // Create orbit ring
-            this.createOrbit(planetData.orbitRadius, index);
 
             // Create Saturn's ring if needed
             if (planetData.hasRing) {
@@ -269,7 +275,58 @@ const Planets = {
         planet.add(ring2);
     },
 
+    createFeaturedRing(planet, planetSize) {
+        // Golden featured ring - subtle but visible
+        const ringGeometry = new THREE.RingGeometry(
+            planetSize * 1.5,
+            planetSize * 1.8,
+            64
+        );
+        const ringMaterial = new THREE.MeshBasicMaterial({
+            color: 0xffd700,
+            transparent: true,
+            opacity: 0.35,
+            side: THREE.DoubleSide
+        });
+        const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+        ring.rotation.x = Math.PI / 2;
+        ring.userData.isFeaturedRing = true;
+        planet.add(ring);
+
+        // Outer glow ring
+        const glowGeometry = new THREE.RingGeometry(
+            planetSize * 1.8,
+            planetSize * 2.1,
+            64
+        );
+        const glowMaterial = new THREE.MeshBasicMaterial({
+            color: 0xffaa00,
+            transparent: true,
+            opacity: 0.15,
+            side: THREE.DoubleSide
+        });
+        const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+        glow.rotation.x = Math.PI / 2;
+        planet.add(glow);
+    },
+
+    createAtmosphere(planet, planetSize, color) {
+        // Atmosphere glow effect (Fresnel-like)
+        const atmosphereGeometry = new THREE.SphereGeometry(planetSize * 1.12, 32, 32);
+        const atmosphereMaterial = new THREE.MeshBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 0.12,
+            side: THREE.BackSide
+        });
+        const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+        planet.add(atmosphere);
+    },
+
     update() {
+        // Skip animation if paused (star map mode)
+        if (this.paused) return;
+
         // Rotate sun with pulse effect
         if (this.sun) {
             this.sun.rotation.y += 0.002;
@@ -299,6 +356,16 @@ const Planets = {
 
             // Self rotation
             planet.rotation.y += data.rotationSpeed;
+
+            // Animate featured ring pulse
+            if (data.data.featured) {
+                planet.children.forEach(child => {
+                    if (child.userData && child.userData.isFeaturedRing) {
+                        const pulse = 0.3 + 0.1 * Math.sin(Date.now() * 0.002);
+                        child.material.opacity = pulse;
+                    }
+                });
+            }
         });
 
         // Update blackholes with disk rotation

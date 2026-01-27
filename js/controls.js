@@ -6,6 +6,11 @@ const Controls = {
     enabled: true,
     target: new THREE.Vector3(0, 0, 0),
 
+    // Star Map Mode
+    isStarMapMode: false,
+    savedSpherical: null,
+    savedTarget: null,
+
     // Animation
     isAnimating: false,
     animationProgress: 0,
@@ -182,5 +187,58 @@ const Controls = {
         this.spherical.theta = 0;
         this.spherical.phi = Math.PI / 3;
         this.updateCameraPosition();
+    },
+
+    enterStarMapMode() {
+        if (this.isStarMapMode) return;
+
+        // Save current camera state
+        this.savedSpherical = { ...this.spherical };
+        this.savedTarget = this.target.clone();
+
+        // Animate to top-down view
+        this.startTarget.copy(this.target);
+        this.startSpherical.radius = this.spherical.radius;
+        this.startSpherical.theta = this.spherical.theta;
+        this.startSpherical.phi = this.spherical.phi;
+
+        this.endTarget.set(0, 0, 0);
+        this.endSpherical.radius = 1200;
+        this.endSpherical.theta = 0;
+        this.endSpherical.phi = 0.1; // Nearly top-down
+
+        this.isAnimating = true;
+        this.animationProgress = 0;
+        this.isStarMapMode = true;
+        this.enabled = false; // Disable orbit controls
+
+        // Pause planet animation
+        Planets.paused = true;
+    },
+
+    exitStarMapMode() {
+        if (!this.isStarMapMode) return;
+
+        // Animate back to saved position
+        this.startTarget.copy(this.target);
+        this.startSpherical.radius = this.spherical.radius;
+        this.startSpherical.theta = this.spherical.theta;
+        this.startSpherical.phi = this.spherical.phi;
+
+        this.endTarget.copy(this.savedTarget);
+        this.endSpherical.radius = this.savedSpherical.radius;
+        this.endSpherical.theta = this.savedSpherical.theta;
+        this.endSpherical.phi = this.savedSpherical.phi;
+
+        this.isAnimating = true;
+        this.animationProgress = 0;
+        this.isStarMapMode = false;
+        this.enabled = true;
+
+        // Resume planet animation
+        Planets.paused = false;
+
+        // Hide labels
+        UI.hideStarMapLabels();
     }
 };

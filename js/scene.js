@@ -44,6 +44,9 @@ const SpaceScene = {
         // Add starfield
         this.addStarfield();
 
+        // Add nebula clouds
+        this.addNebula();
+
         // Add meteors
         this.addMeteors();
 
@@ -131,6 +134,54 @@ const SpaceScene = {
 
         const stars = new THREE.Points(geometry, material);
         this.scene.add(stars);
+    },
+
+    addNebula() {
+        // Create colorful nebula clouds using particle systems
+        const nebulaColors = [
+            { color: 0x6622aa, opacity: 0.08 },  // Purple
+            { color: 0x2244aa, opacity: 0.06 },  // Blue
+            { color: 0xaa2266, opacity: 0.05 },  // Pink
+            { color: 0x22aa88, opacity: 0.04 }   // Teal
+        ];
+
+        nebulaColors.forEach((nebula, index) => {
+            this.createNebulaCloud(nebula.color, nebula.opacity, index);
+        });
+    },
+
+    createNebulaCloud(color, opacity, seed) {
+        const count = 300;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(count * 3);
+
+        // Create cloud-like distribution
+        const centerX = (seed % 2 === 0 ? 1 : -1) * (1500 + seed * 300);
+        const centerZ = (seed < 2 ? 1 : -1) * (1200 + seed * 200);
+
+        for (let i = 0; i < count * 3; i += 3) {
+            const r = Math.random() * 800;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.random() * Math.PI;
+
+            positions[i] = centerX + r * Math.sin(phi) * Math.cos(theta);
+            positions[i + 1] = (Math.random() - 0.5) * 400;
+            positions[i + 2] = centerZ + r * Math.sin(phi) * Math.sin(theta);
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        const material = new THREE.PointsMaterial({
+            color: color,
+            size: 80,
+            transparent: true,
+            opacity: opacity,
+            sizeAttenuation: true,
+            blending: THREE.AdditiveBlending
+        });
+
+        const nebula = new THREE.Points(geometry, material);
+        this.scene.add(nebula);
     },
 
     addMeteors() {

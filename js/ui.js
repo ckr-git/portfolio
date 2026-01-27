@@ -42,6 +42,14 @@ const UI = {
         document.querySelector('.close-btn').addEventListener('click', () => {
             this.hidePanel();
         });
+
+        // Star map exit button
+        const starmapExit = document.getElementById('starmap-exit');
+        if (starmapExit) {
+            starmapExit.addEventListener('click', () => {
+                this.setMode('orbit');
+            });
+        }
     },
 
     setLanguage(lang) {
@@ -66,13 +74,25 @@ const UI = {
 
         // Toggle HUD visibility
         const hud = document.getElementById('spaceship-hud');
+        const starmapExit = document.getElementById('starmap-exit');
 
         if (mode === 'spaceship') {
             Spaceship.enable();
             hud.classList.remove('hidden');
+            starmapExit.classList.add('hidden');
+            if (Controls.isStarMapMode) Controls.exitStarMapMode();
+        } else if (mode === 'starmap') {
+            Spaceship.disable();
+            hud.classList.add('hidden');
+            starmapExit.classList.remove('hidden');
+            Controls.enterStarMapMode();
+            // Generate labels after camera animation
+            setTimeout(() => this.showStarMapLabels(), 1200);
         } else {
             Spaceship.disable();
             hud.classList.add('hidden');
+            starmapExit.classList.add('hidden');
+            if (Controls.isStarMapMode) Controls.exitStarMapMode();
             Controls.resetView();
         }
     },
@@ -372,5 +392,70 @@ const UI = {
             ctx.arc(x, y, 4, 0, Math.PI * 2);
             ctx.fill();
         });
+    },
+
+    // Star Map Mode Methods
+    showStarMapLabels() {
+        const container = document.getElementById('starmap-labels');
+        if (!container) return;
+
+        const isZh = this.currentLang === 'zh';
+        let html = '';
+
+        // Add sun label
+        const sunPos = this.project3DTo2D(new THREE.Vector3(0, 0, 0));
+        html += `<div class="starmap-label starmap-sun" style="left:${sunPos.x}px;top:${sunPos.y}px"
+                     onclick="UI.onStarMapSunClick()">
+                    <span class="label-dot sun-dot"></span>
+                    <span class="label-text">${isZh ? '关于我' : 'About Me'}</span>
+                </div>`;
+
+        // Add planet labels
+        Planets.objects.forEach((planet, index) => {
+            const data = planet.userData.data;
+            const pos = this.project3DTo2D(planet.position);
+            const name = isZh ? data.nameCN : data.name;
+            const featured = data.featured ? 'featured' : '';
+
+            html += `<div class="starmap-label ${featured}" style="left:${pos.x}px;top:${pos.y}px"
+                         onclick="UI.onStarMapLabelClick(${index})">
+                        <span class="label-dot" style="background:${data.color}"></span>
+                        <span class="label-text">${name}</span>
+                        ${data.featured ? '<span class="label-star">★</span>' : ''}
+                    </div>`;
+        });
+
+        container.innerHTML = html;
+        container.classList.remove('hidden');
+    },
+
+    hideStarMapLabels() {
+        const container = document.getElementById('starmap-labels');
+        if (container) {
+            container.classList.add('hidden');
+            container.innerHTML = '';
+        }
+        document.getElementById('starmap-exit').classList.add('hidden');
+    },
+
+    project3DTo2D(position) {
+        const vector = position.clone();
+        vector.project(SpaceScene.camera);
+
+        return {
+            x: (vector.x * 0.5 + 0.5) * window.innerWidth,
+            y: (-vector.y * 0.5 + 0.5) * window.innerHeight
+        };
+    },
+
+    onStarMapLabelClick(index) {
+        const planet = Planets.objects[index];
+        if (planet) {
+            this.showPanel(planet.userData.data);
+        }
+    },
+
+    onStarMapSunClick() {
+        this.showDeveloperPanel(Planets.data.developer);
     }
 };
