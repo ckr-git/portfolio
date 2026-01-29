@@ -80,7 +80,12 @@ const UI = {
             Spaceship.enable();
             hud.classList.remove('hidden');
             starmapExit.classList.add('hidden');
-            if (Controls.isStarMapMode) Controls.exitStarMapMode();
+            if (Controls.isStarMapMode) {
+                Controls.exitStarMapMode();
+                // Close any panels opened in star map mode
+                this.hidePanel();
+                this.hideDeveloperPanel();
+            }
         } else if (mode === 'starmap') {
             Spaceship.disable();
             hud.classList.add('hidden');
@@ -92,7 +97,12 @@ const UI = {
             Spaceship.disable();
             hud.classList.add('hidden');
             starmapExit.classList.add('hidden');
-            if (Controls.isStarMapMode) Controls.exitStarMapMode();
+            if (Controls.isStarMapMode) {
+                Controls.exitStarMapMode();
+                // Close any panels opened in star map mode
+                this.hidePanel();
+                this.hideDeveloperPanel();
+            }
             Controls.resetView();
         }
     },
