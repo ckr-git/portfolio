@@ -472,16 +472,6 @@ const UI = {
                         ${data.featured ? '<span class="label-star">★</span>' : ''}
                     </div>`;
         });
-            const name = isZh ? data.nameCN : data.name;
-            const featured = data.featured ? 'featured' : '';
-
-            html += `<div class="starmap-label ${featured}" style="left:${pos.x}px;top:${pos.y}px"
-                         onclick="UI.onStarMapLabelClick(${index})">
-                        <span class="label-dot" style="background:${data.color}"></span>
-                        <span class="label-text">${name}</span>
-                        ${data.featured ? '<span class="label-star">★</span>' : ''}
-                    </div>`;
-        });
 
         container.innerHTML = html;
         container.classList.remove('hidden');
