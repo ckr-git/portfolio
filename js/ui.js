@@ -12,6 +12,7 @@ const UI = {
     skillsCtx: null,
     currentScreenshots: [],
     currentScreenshotIndex: 0,
+    currentPanelData: null,
 
     init() {
         this.panel = document.getElementById('planet-panel');
@@ -60,10 +61,27 @@ const UI = {
             btn.classList.toggle('active', btn.dataset.lang === lang);
         });
 
-        // Update all translatable elements
+        // Update all translatable elements (static HTML with data-en/data-zh)
         document.querySelectorAll('[data-en]').forEach(el => {
             el.textContent = el.dataset[lang] || el.dataset.en;
         });
+
+        // Re-render project panel if open
+        if (this.currentPanelData && !this.panel.classList.contains('hidden')) {
+            this.showPanel(this.currentPanelData);
+        }
+
+        // Re-render developer panel if open
+        const devPanel = document.getElementById('developer-panel');
+        if (devPanel && !devPanel.classList.contains('hidden')) {
+            this.showDeveloperPanel(Planets.data.developer);
+        }
+
+        // Re-render star map labels if visible
+        const starmapLabels = document.getElementById('starmap-labels');
+        if (starmapLabels && !starmapLabels.classList.contains('hidden')) {
+            this.showStarMapLabels();
+        }
     },
 
     setMode(mode) {
@@ -108,6 +126,7 @@ const UI = {
     },
 
     showPanel(data) {
+        this.currentPanelData = data;
         const isZh = this.currentLang === 'zh';
 
         document.getElementById('panel-name').textContent =
@@ -170,6 +189,7 @@ const UI = {
 
     hidePanel() {
         this.panel.classList.add('hidden');
+        this.currentPanelData = null;
     },
 
     renderScreenshotGallery(container, altText) {
