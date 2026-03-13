@@ -10,7 +10,7 @@ const Planets = {
     paused: false,
 
     async load() {
-        const response = await fetch('data/projects.json');
+        const response = await fetch('data/projects.json?v=' + Date.now());
         this.data = await response.json();
     },
 
