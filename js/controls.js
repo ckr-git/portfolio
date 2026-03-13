@@ -203,7 +203,7 @@ const Controls = {
         this.startSpherical.phi = this.spherical.phi;
 
         this.endTarget.set(0, 0, 0);
-        this.endSpherical.radius = 1200;
+        this.endSpherical.radius = 1400;
         this.endSpherical.theta = 0;
         this.endSpherical.phi = 0.1; // Nearly top-down
 

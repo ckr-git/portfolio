@@ -440,10 +440,38 @@ const UI = {
                     <span class="label-text">${isZh ? '关于我' : 'About Me'}</span>
                 </div>`;
 
-        // Add planet labels
+        // Find max orbit radius for sqrt normalization
+        const maxOrbit = Math.max(...Planets.data.planets.map(p => p.orbitRadius));
+        const targetMax = 700;
+
+        // Add planet labels with sqrt-compressed positions
         Planets.objects.forEach((planet, index) => {
             const data = planet.userData.data;
-            const pos = this.project3DTo2D(planet.position);
+
+            // Compress radial distance: sqrt scaling pulls far planets closer,
+            // spreads inner planets out, making all visible in star map
+            const px = planet.position.x;
+            const pz = planet.position.z;
+            const dist = Math.sqrt(px * px + pz * pz);
+            let pos;
+            if (dist > 0) {
+                const compressed = Math.sqrt(dist / maxOrbit) * targetMax;
+                const scale = compressed / dist;
+                pos = this.project3DTo2D(new THREE.Vector3(px * scale, 0, pz * scale));
+            } else {
+                pos = this.project3DTo2D(planet.position);
+            }
+
+            const name = isZh ? data.nameCN : data.name;
+            const featured = data.featured ? 'featured' : '';
+
+            html += `<div class="starmap-label ${featured}" style="left:${pos.x}px;top:${pos.y}px"
+                         onclick="UI.onStarMapLabelClick(${index})">
+                        <span class="label-dot" style="background:${data.color}"></span>
+                        <span class="label-text">${name}</span>
+                        ${data.featured ? '<span class="label-star">★</span>' : ''}
+                    </div>`;
+        });
             const name = isZh ? data.nameCN : data.name;
             const featured = data.featured ? 'featured' : '';
 
