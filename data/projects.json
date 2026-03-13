@@ -119,9 +119,9 @@
       "rotationSpeed": 0.005,
       "orbitSpeed": 0.003,
       "color": "#d4a574",
-      "description": "Enterprise AI image processing platform with ComfyUI integration",
-      "descriptionCN": "集成ComfyUI的企业级AI图像处理平台",
-      "techStack": ["React 19", "FastAPI", "ComfyUI", "Celery", "Redis", "Docker"],
+      "description": "Enterprise AI image processing platform with ComfyUI integration. Deployed to production with Docker + Nginx, serving real business workloads",
+      "descriptionCN": "集成ComfyUI的企业级AI图像处理平台。已部署生产环境，基于Docker+Nginx容器化交付，承载真实业务流量",
+      "techStack": ["React 19", "FastAPI", "ComfyUI", "Celery", "Redis", "Docker", "Nginx"],
       "github": "https://github.com/ckr-git/ai-image-platform",
       "isCommercial": true,
       "featured": true,
@@ -368,6 +368,88 @@
       "milestones": [
         {"date": "2024-06", "version": "v1.0", "content": "Pattern generation"},
         {"date": "2024-08", "version": "v1.5", "content": "Style transfer"}
+      ]
+    },
+    {
+      "id": "gonggong",
+      "name": "AI Image Toolbox",
+      "nameCN": "AI图片工具箱",
+      "orbitRadius": 890,
+      "size": 10,
+      "rotationSpeed": 0.0008,
+      "orbitSpeed": 0.00035,
+      "color": "#00b894",
+      "description": "WeChat Mini-Program for AI-powered image processing. Independently designed, developed, and launched end-to-end. Features cross-cloud architecture with Tencent Cloud Functions + Alibaba Cloud AI for intelligent cutout and ID photo generation. Built-in freemium monetization system with ad-reward unlocking",
+      "descriptionCN": "AI驱动的图片处理微信小程序。独立完成产品设计、全栈开发、上线运营全流程。采用腾讯云函数+阿里云AI跨云架构，实现智能抠图与证件照生成。内置免费次数+广告激励的商业变现体系",
+      "techStack": ["WeChat Mini-Program", "Tencent Cloud", "Alibaba Cloud AI", "Cloud Functions", "Canvas API"],
+      "isCommercial": true,
+      "featured": true,
+      "screenshots": [],
+      "milestones": [
+        {"date": "2024-08", "version": "v1.0", "content": "Core AI cutout & ID photo features"},
+        {"date": "2024-10", "version": "v1.5", "content": "Ad monetization & cross-cloud optimization"},
+        {"date": "2025-01", "version": "v2.0", "content": "Production launch on WeChat platform"}
+      ]
+    },
+    {
+      "id": "varuna",
+      "name": "Emoji Factory",
+      "nameCN": "表情包工厂",
+      "orbitRadius": 940,
+      "size": 8,
+      "rotationSpeed": 0.0007,
+      "orbitSpeed": 0.0003,
+      "color": "#fd79a8",
+      "description": "WeChat Mini-Program for custom emoji creation. Independently handled the full product lifecycle from UI design to development and launch. Features a built-in emoji editor with template system, personal gallery management, and freemium engagement model with ad-reward mechanics",
+      "descriptionCN": "自定义表情包制作微信小程序。独立负责从UI设计到开发上线的全产品生命周期。内置表情编辑器与模板系统，支持个人作品库管理，采用免费次数+广告激励的用户增长模型",
+      "techStack": ["WeChat Mini-Program", "Canvas API", "Image Processing", "Component Architecture"],
+      "isCommercial": true,
+      "screenshots": [],
+      "milestones": [
+        {"date": "2024-09", "version": "v1.0", "content": "Emoji editor & template browser"},
+        {"date": "2024-11", "version": "v1.5", "content": "Gallery management & ad monetization"},
+        {"date": "2025-02", "version": "v2.0", "content": "Production launch on WeChat platform"}
+      ]
+    },
+    {
+      "id": "ixion",
+      "name": "Quiz Planet",
+      "nameCN": "妙测星球",
+      "orbitRadius": 990,
+      "size": 8,
+      "rotationSpeed": 0.0006,
+      "orbitSpeed": 0.00025,
+      "color": "#a29bfe",
+      "description": "WeChat Mini-Program for interactive fun quizzes. Solo-built from concept design through development to live deployment. Features a data-driven quiz engine with dynamic result analytics, social sharing mechanics, and a freemium model with daily free attempts and ad-reward unlocking",
+      "descriptionCN": "趣味互动测试微信小程序。从概念设计到开发部署独立完成全流程。采用数据驱动的测试引擎，支持动态结果分析与社交分享机制，内置每日免费次数+广告激励解锁的变现体系",
+      "techStack": ["WeChat Mini-Program", "Data-Driven Engine", "Social Sharing", "Ad Integration"],
+      "isCommercial": true,
+      "screenshots": [],
+      "milestones": [
+        {"date": "2024-10", "version": "v1.0", "content": "Quiz engine & result analytics"},
+        {"date": "2024-12", "version": "v1.5", "content": "Social sharing & ad monetization"},
+        {"date": "2025-02", "version": "v2.0", "content": "Production launch on WeChat platform"}
+      ]
+    },
+    {
+      "id": "salacia",
+      "name": "Omnimind",
+      "nameCN": "Omnimind 自主智能系统",
+      "orbitRadius": 1040,
+      "size": 12,
+      "rotationSpeed": 0.0005,
+      "orbitSpeed": 0.0002,
+      "color": "#6c5ce7",
+      "description": "Modular AI Agent framework with autonomous reasoning. Implements a Universe-Observer paradigm: possibility space (state superposition), observer collapse (reality selection), and self-referential recursion. Features BDI architecture, 6-phase autonomous decision loop, vector-based memory system, and meta-cognition for self-monitoring",
+      "descriptionCN": "模块化AI Agent自主智能框架。实现宇宙-观测者范式：可能性空间（状态叠加）、观测坍缩（选择现实）、自指递归系统。采用BDI架构与6阶段自主决策循环，内置向量记忆系统与元认知自我监控机制",
+      "techStack": ["Python", "Vector Store", "BDI Architecture", "Meta-Cognition", "Autonomous Agent"],
+      "github": "https://github.com/ckr-git/omnimind",
+      "featured": true,
+      "screenshots": [],
+      "milestones": [
+        {"date": "2024-11", "version": "v0.1", "content": "Core Universe-Observer paradigm"},
+        {"date": "2025-01", "version": "v0.5", "content": "BDI architecture & memory system"},
+        {"date": "2025-02", "version": "v1.0", "content": "Autonomous decision loop & meta-cognition"}
       ]
     }
   ],
