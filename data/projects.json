@@ -2,17 +2,17 @@
   "developer": {
     "name": "Kunru Che",
     "nameCN": "车坤儒",
-    "description": "Full-Stack Developer & Vibe Coding Engineer passionate about AI and creative solutions",
-    "descriptionCN": "热爱AI和创意解决方案的全栈开发者 & Vibe Coding工程师",
+    "description": "Full-Stack Engineer specializing in Spring Boot & React. Microservices, RAG-powered AI apps, and commercial delivery from architecture to Docker deployment",
+    "descriptionCN": "专注 Spring Boot 与 React 的全栈工程师。擅长微服务、RAG 智能应用与商业项目交付，从架构设计到 Docker 部署全流程独立完成",
     "github": "https://github.com/ckr-git",
-    "email": "sgshzjsj26517@qq.com",
-    "resume": "车坤儒 - Vibe Coding编码工程师简历.pdf"
+    "email": "18799384695@163.com",
+    "resume": "车坤儒-全栈工程师简历.pdf"
   },
   "skills": {
     "frontend": { "React": 8, "Vue": 8, "TypeScript": 8 },
-    "backend": { "Spring Boot": 8, "Node.js": 9, "Python/FastAPI": 9 },
-    "ai": { "ComfyUI": 7, "AI应用开发": 10 },
-    "database": { "MySQL": 9, "Redis": 8 },
+    "backend": { "Spring Boot": 9, "Spring Cloud": 8, "Node.js": 8 },
+    "ai": { "RAG/Spring AI": 9, "AI应用开发": 10 },
+    "database": { "PostgreSQL": 9, "Redis": 8 },
     "other": { "Docker": 8, "Git": 8 }
   },
   "planets": [
@@ -450,6 +450,48 @@
         {"date": "2024-11", "version": "v0.1", "content": "Core Universe-Observer paradigm"},
         {"date": "2025-01", "version": "v0.5", "content": "BDI architecture & memory system"},
         {"date": "2025-02", "version": "v1.0", "content": "Autonomous decision loop & meta-cognition"}
+      ]
+    },
+    {
+      "id": "logos",
+      "name": "Enterprise Banking System",
+      "nameCN": "企业级银行核心系统",
+      "orbitRadius": 1090,
+      "size": 22,
+      "rotationSpeed": 0.0045,
+      "orbitSpeed": 0.00018,
+      "color": "#0984e3",
+      "description": "Quasi-enterprise online banking system with a full client portal and admin console, covering accounts, transfers, deposits, loans, wealth management and credit cards. Built on 8 microservices with an API gateway, a generic approval state-machine engine, a 5-rule risk-control engine, double-entry bookkeeping, audit logs and multi-role RBAC",
+      "descriptionCN": "准企业级在线银行系统，包含完整客户端门户与管理后台，涵盖账户、转账、存款、贷款、理财、信用卡等核心银行业务。8 个微服务 + API 网关，含通用审批状态机引擎、5 类规则风控引擎、复式记账、审计日志与多角色 RBAC（客户/经理/风控专员/管理员）",
+      "techStack": ["Spring Boot 3", "Spring Cloud Gateway", "React 18", "PostgreSQL", "Redis", "RocketMQ"],
+      "github": "https://github.com/ckr-git/online-bank",
+      "featured": true,
+      "screenshots": [],
+      "milestones": [
+        {"date": "2026-01", "version": "v0.5", "content": "Core services & API gateway"},
+        {"date": "2026-02", "version": "v1.0", "content": "Approval state machine & risk-control engine"},
+        {"date": "2026-03", "version": "v1.5", "content": "Double-entry bookkeeping & audit logs"}
+      ]
+    },
+    {
+      "id": "vesta",
+      "name": "Zhidian AI — RAG Customer Service",
+      "nameCN": "智店AI — RAG 智能客服平台",
+      "orbitRadius": 1140,
+      "size": 16,
+      "rotationSpeed": 0.004,
+      "orbitSpeed": 0.00015,
+      "color": "#00cec9",
+      "description": "RAG-based intelligent customer-service platform, deployed and running at chekunru.asia. Supports knowledge-base management and AI auto-answering: documents in 8 formats are auto-chunked and vectorized into pgvector, SSE streaming chat retrieves the top-5 relevant passages before answering, with JWT auth, FAQ management and persisted conversation history",
+      "descriptionCN": "基于 RAG（检索增强生成）的智能客服平台，已部署上线于 chekunru.asia。支持知识库管理与 AI 自动问答：8 种文档格式自动分块向量化存入 pgvector，SSE 流式对话检索 Top-5 相关内容后生成回答，含 JWT 认证、FAQ 管理与对话记录持久化",
+      "techStack": ["Spring Boot 3", "Spring AI", "React 18", "PostgreSQL", "pgvector", "Redis", "Docker"],
+      "isCommercial": true,
+      "featured": true,
+      "screenshots": [],
+      "milestones": [
+        {"date": "2025-10", "version": "v0.5", "content": "RAG knowledge base & vectorization"},
+        {"date": "2026-01", "version": "v1.0", "content": "SSE streaming chat & FAQ management"},
+        {"date": "2026-11", "version": "v1.5", "content": "Production launch at chekunru.asia"}
       ]
     }
   ],
